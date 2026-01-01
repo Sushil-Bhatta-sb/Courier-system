@@ -80,8 +80,22 @@ def api_get_customers(request):
 
     return JsonResponse(customers, safe=False)
 
+def get_mode(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT mode_id, mode_name FROM mode_of_transport")
+        rows = cursor.fetchall()
+
+    modes = [{"id": r[0], "name": r[1]} for r in rows]
+    return JsonResponse(modes, safe=False)
 
 
+def get_status(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT status_id, status_name FROM status")
+        rows = cursor.fetchall()
+
+    statuses = [{"id": r[0], "name": r[1]} for r in rows]
+    return JsonResponse(statuses, safe=False)
 
 @csrf_exempt
 def api_add_staff(request):
@@ -101,68 +115,49 @@ def api_add_staff(request):
         return JsonResponse({"message": "Staff added successfully!"})
 
 
+@csrf_exempt
+def add_shipment(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required"}, status=400)
 
+    data = json.loads(request.body)
 
-def shipment(request):
-    message = ""
-    modes = []
-    statuses = []
-    cost = 0.0
-    pickup_address = ""
-    delivery_address = ""
-    weight = ""
+    customer_id = data.get("customer_id")
+    pickup_address = data.get("pickup_address")
+    delivery_address = data.get("delivery_address")
+    weight = float(data.get("weight"))
+    mode_id = data.get("mode_id")
+    status_id = data.get("status_id")
 
+    # check mode multiplier & calculate cost
     with connection.cursor() as cursor:
-        cursor.execute("SELECT mode_id, mode_name FROM mode_of_transport")
-        modes = cursor.fetchall()
-        cursor.execute("SELECT status_id, status_name FROM status")
-        statuses = cursor.fetchall()
+        cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
+        row = cursor.fetchone()
 
-    if request.method == "POST":
-        customer_id = request.POST.get("customer_id")
-        pickup_address = request.POST.get("pickup_address")
-        delivery_address = request.POST.get("delivery_address")
-        weight = request.POST.get("weight")
-        mode_id = request.POST.get("mode_id")
-        status_id = request.POST.get("status_id")
-        booking_date = date.today()
+    if not row or row[0] is None:
+        return JsonResponse({"error": "Invalid mode ID"}, status=400)
 
+    multiplier = float(row[0])
+    cost = weight * multiplier * 100
+
+    # insert shipment
+    try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
-            row = cursor.fetchone()
-            
-            if row and row[0] is not None:
-                multiplier = float(row[0]) 
-                weight_val = float(weight) if weight and weight.strip() else 0.0
-                cost = weight_val * multiplier * 100
-            else:
-             
-                message = f"Error: Multiplier not found for Mode ID {mode_id}."
-                return render(request, "courier/shipment.html", {
-                    "modes": modes, "statuses": statuses, "message": message
-                })
+            cursor.execute("""
+                INSERT INTO shipment 
+                (customer_id, staff_id, mode_id, status_id, pickup_address, 
+                 delivery_address, weight, cost, booking_date)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, [customer_id, None, mode_id, status_id, pickup_address, 
+                  delivery_address, weight, cost, date.today()])
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
-    
-        try:
-            with connection.cursor() as cursor:
-                cursor.execute("""
-                    INSERT INTO shipment 
-                    (customer_id, staff_id, mode_id, status_id, pickup_address, 
-                     delivery_address, weight, cost, booking_date)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """, [customer_id, None, mode_id, status_id, pickup_address, 
-                      delivery_address, weight, cost, booking_date])
-                
-            message = "Shipment booked successfully!"
-        except Exception as e:
-            message = f"Database Error: {str(e)}"
-
-    return render(request, "courier/shipment.html", {
-        "modes": modes,
-        "statuses": statuses,
-        "message": message,
-        "cost": cost,
+    return JsonResponse({
+        "message": "Shipment booked successfully!",
         "pickup_address": pickup_address,
         "delivery_address": delivery_address,
-        "weight": weight
+        "weight": weight,
+        "cost": cost
     })
+
