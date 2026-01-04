@@ -129,7 +129,6 @@ def add_shipment(request):
     mode_id = data.get("mode_id")
     status_id = data.get("status_id")
 
-    # check mode multiplier & calculate cost
     with connection.cursor() as cursor:
         cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
         row = cursor.fetchone()
@@ -140,7 +139,6 @@ def add_shipment(request):
     multiplier = float(row[0])
     cost = weight * multiplier * 100
 
-    # insert shipment
     try:
         with connection.cursor() as cursor:
             cursor.execute("""

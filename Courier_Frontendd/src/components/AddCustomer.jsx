@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddStatus from  "./AddStatus";
+import AddStatus from  "./AddStatus.jsx";
 
 export default function AddCustomer() {
   const [name, setName] = useState("");
