@@ -1,32 +1,49 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
+import Home from "./pages/Home";
+import About from "./pages/About";
+
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+import AddShipment  from "./pages/admin/AddShipment";
+import AddCustomer from "./pages/admin/AddCustomer";
+import AddStaff from "./pages/admin/AddStaff";
+import AddMode from "./pages/admin/AddMode";
+import AddStatus from "./pages/admin/AddStatus";
+import CustomerDsh from "./pages/customer/CustomerDsh";
+
+import StaffDsh from "./pages/Staff/StaffDsh";
+
+
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+
+        {/* Admin */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/AddShipment" element={<AddShipment />} />
+        <Route path="/admin/AddCustomer" element={<AddCustomer />} />
+        <Route path="/admin/AddStaff" element={<AddStaff />} />
+        <Route path="/admin/AddMode" element={<AddMode />} />
+        <Route path="/admin/AddStatus" element={<AddStatus />} />
+        {/* Customer */}
+        <Route path="/customer" element={<CustomerDsh />} />
+
+        {/* Staff */}
+        <Route path="/Staff" element={<StaffDsh />} />
+      </Routes>
+
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
