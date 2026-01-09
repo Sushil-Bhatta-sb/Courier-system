@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AddStatus from  "./AddStatus.jsx";
 
 export default function AddCustomer() {
   const [name, setName] = useState("");
@@ -20,7 +19,6 @@ export default function AddCustomer() {
 
   return (
     <div>
-      <AddStatus />
       <h2>Add Customer</h2>
 
       <input placeholder="Name" onChange={e => setName(e.target.value)} /><br/>

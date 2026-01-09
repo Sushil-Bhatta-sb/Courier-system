@@ -1,22 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
-
+import DetailsDsh from "./pages/admin/details/DetailsDsh";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-
 import AddShipment  from "./pages/admin/AddShipment";
 import AddCustomer from "./pages/admin/AddCustomer";
 import AddStaff from "./pages/admin/AddStaff";
 import AddMode from "./pages/admin/AddMode";
 import AddStatus from "./pages/admin/AddStatus";
 import CustomerDsh from "./pages/customer/CustomerDsh";
-
 import StaffDsh from "./pages/Staff/StaffDsh";
-
+import ViewCostumers from "./pages/admin/details/ViewCostumers";
+import ViewShipments from "./pages/admin/details/ViewShipments";
+import ViewModes from "./pages/admin/details/ViewModes";
+import ViewStaffs  from "./pages/admin/details/ViewStaffs";
+import ViewStatus from "./pages/admin/details/ViewStatus";
 
 export default function App() {
   return (
@@ -27,19 +27,21 @@ export default function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-
-        {/* Admin */}
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/AddShipment" element={<AddShipment />} />
         <Route path="/admin/AddCustomer" element={<AddCustomer />} />
         <Route path="/admin/AddStaff" element={<AddStaff />} />
         <Route path="/admin/AddMode" element={<AddMode />} />
         <Route path="/admin/AddStatus" element={<AddStatus />} />
-        {/* Customer */}
         <Route path="/customer" element={<CustomerDsh />} />
-
-        {/* Staff */}
         <Route path="/Staff" element={<StaffDsh />} />
+        <Route path="/details" element={<DetailsDsh/>} />
+        <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />
+        <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
+        <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
+        <Route path="/admin/details/ViewModes" element={<ViewModes />} />
+        <Route path="/admin/details/ViewStaffs" element={<ViewStaffs />} />
+        <Route path="/admin/details/ViewStatus" element={<ViewStatus />} />
       </Routes>
 
       <Footer />

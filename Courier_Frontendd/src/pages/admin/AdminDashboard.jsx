@@ -11,6 +11,7 @@ export default function AdminDashboard() {
         <li><Link to="/admin/AddStaff">Staff</Link></li>
         <li><Link to="/admin/AddMode">Modes of Transport</Link></li>
         <li><Link to="/admin/AddStatus">Shipment Status</Link></li>
+        <li><Link to="/details">View Details</Link></li>
       </ul>
     </div>
   );
