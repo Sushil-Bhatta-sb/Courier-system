@@ -1,30 +1,51 @@
 export default function Home() {
   return (
-    <div className="min-h-[80vh]  from-blue-900 via-indigo-900 to-purple-900 text-white flex items-center">
-      <div className="max-w-6xl mx-auto px-10 grid md:grid-cols-2 gap-10 items-center">
-
-        {/* LEFT CONTENT */}
+    <div
+      className="min-h-screen text-white flex items-center"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/courier.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-10 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h1 className="text-5xl font-extrabold leading-tight mb-6">
-            Courier <span className="text-yellow-400">Management</span> System
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+            Courier <span className="text-yellow-400">Management</span>
+            <br /> System
           </h1>
 
-          <p className="text-lg text-gray-200 mb-8">
-            Delivering parcels faster, safer, and smarter with real-time tracking,
-            automated costing, and seamless management.
+          <p className="text-lg text-gray-200 mb-8 max-w-xl">
+            Deliver parcels faster, safer and smarter with real-time tracking,
+            automated pricing, and seamless shipment management.
           </p>
 
           <div className="flex gap-4">
-           
+            <a
+              href="/admin/AddShipment"
+              className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition"
+            >
+              Book Your Shipment
+            </a>
+
+            <a
+              href="/admin/AdminDashboard"
+              className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition"
+            >
+              Admin
+            </a>
           </div>
         </div>
 
-        {/* RIGHT CARD */}
+  
         <div className="hidden md:block">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
-            <h3 className="text-xl font-semibold mb-4">Why Choose Us?</h3>
+            <h3 className="text-xl font-semibold mb-4 text-yellow-300">
+              Why Choose Us?
+            </h3>
 
-            <ul className="space-y-3 text-blue-400">
+            <ul className="space-y-3 text-gray-200">
               <li>🚚 Fast & reliable delivery</li>
               <li>📍 Live shipment tracking</li>
               <li>💳 Online payment support</li>
