@@ -61,7 +61,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  
     "http://127.0.0.1:5173",
 ]
-
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = False 
+CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'courier_management.urls'
 
 TEMPLATES = [

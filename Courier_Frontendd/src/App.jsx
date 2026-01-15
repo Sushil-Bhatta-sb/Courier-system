@@ -18,16 +18,15 @@ import ViewModes from "./pages/admin/details/ViewModes";
 import ViewStaffs  from "./pages/admin/details/ViewStaffs";
 import ViewStatus from "./pages/admin/details/ViewStatus";
 
+
 export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
-
       <Routes>
-
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/admin/AddShipment" element={<AddShipment />} />
         <Route path="/admin/AddCustomer" element={<AddCustomer />} />
         <Route path="/admin/AddStaff" element={<AddStaff />} />
@@ -38,12 +37,10 @@ export default function App() {
         <Route path="/details" element={<DetailsDsh/>} />
         <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />
         <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
-        <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
         <Route path="/admin/details/ViewModes" element={<ViewModes />} />
         <Route path="/admin/details/ViewStaffs" element={<ViewStaffs />} />
         <Route path="/admin/details/ViewStatus" element={<ViewStatus />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );

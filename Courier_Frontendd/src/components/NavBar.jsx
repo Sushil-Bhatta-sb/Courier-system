@@ -11,9 +11,10 @@ export default function Navbar() {
     }}>
       <Link to="/" style={{ color: "white" }}>Home</Link>
       <Link to="/about" style={{ color: "white" }}>About</Link>
-      <Link to="/admin" style={{ color: "white" }}>Admin</Link>
+      
       <Link to="/staff" style={{ color: "white" }}>Staff</Link>
       <Link to="/customer" style={{ color: "white" }}>Customer</Link>
+      <Link to="/admin/AdminLogin" style={{ color: "white" }}>Admin</Link>
     </div>
   );
 }
