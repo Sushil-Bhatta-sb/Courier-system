@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import DetailsDsh from "./pages/admin/details/DetailsDsh";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import AddShipment  from "./pages/admin/AddShipment";
-import AddCustomer from "./pages/admin/AddCustomer";
+import AddCustomer from "./pages/customer/AddCustomer"; 
+import AddShipment from "./pages/customer/AddShipment";
 import AddStaff from "./pages/admin/AddStaff";
 import AddMode from "./pages/admin/AddMode";
 import AddStatus from "./pages/admin/AddStatus";
@@ -27,12 +27,12 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/admin/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/admin/AddShipment" element={<AddShipment />} />
-        <Route path="/admin/AddCustomer" element={<AddCustomer />} />
         <Route path="/admin/AddStaff" element={<AddStaff />} />
         <Route path="/admin/AddMode" element={<AddMode />} />
         <Route path="/admin/AddStatus" element={<AddStatus />} />
         <Route path="/customer" element={<CustomerDsh />} />
+        <Route path="/customer/AddCustomer" element={<AddCustomer />} />
+        <Route path="/customer/AddShipment" element={<AddShipment />} />
         <Route path="/Staff" element={<StaffDsh />} />
         <Route path="/details" element={<DetailsDsh/>} />
         <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />

@@ -14,7 +14,7 @@ export default function Navbar() {
       
       <Link to="/staff" style={{ color: "white" }}>Staff</Link>
       <Link to="/customer" style={{ color: "white" }}>Customer</Link>
-      <Link to="/admin/AdminDashboard" style={{ color: "white" }}>Admin</Link>
+    
     </div>
   );
 }
