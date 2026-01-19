@@ -33,7 +33,9 @@ export default function App() {
         <Route path="/customer" element={<CustomerDsh />} />
         <Route path="/customer/AddCustomer" element={<AddCustomer />} />
         <Route path="/customer/AddShipment" element={<AddShipment />} />
-        <Route path="/Staff" element={<StaffDsh />} />
+       <Route path="/staff" element={<StaffDsh />}>
+         <Route path="shipments" element={<ViewShipments />} />
+       </Route>
         <Route path="/details" element={<DetailsDsh/>} />
         <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />
         <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
