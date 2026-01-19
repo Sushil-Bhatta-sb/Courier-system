@@ -10,25 +10,25 @@ export default function ViewCostumers() {
   }, []);
 
   return (
-    <div style={{ padding: "25px" }}>
-      <h2>Customer Details</h2>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        Customer Details
+      </h2>
 
-      {customers.length === 0 && <p>No customers found</p>}
+      <div className="space-y-4">
+        {customers.map(c => (
+          <div
+            key={c.id}
+            className="bg-white border rounded-lg p-4 shadow-sm"
+          >
+            <p><span className="font-semibold">Name:</span> {c.name}</p>
+            <p><span className="font-semibold">Phone:</span> {c.phone}</p>
+            <p><span className="font-semibold">Email:</span> {c.email}</p>
+            <p><span className="font-semibold">Address:</span> {c.address}</p>
+          </div>
+        ))}
+      </div>
 
-      {customers.map(c => (
-        <div key={c.id}
-          style={{
-            border: "1px solid #ccc",
-            margin: "10px 0",
-            padding: "12px",
-            borderRadius: "6px"
-          }}>
-          <p><b>Name:</b> {c.name}</p>
-          <p><b>Phone:</b> {c.phone}</p>
-          <p><b>Email:</b> {c.email}</p>
-          <p><b>Address:</b> {c.address}</p>
-        </div>
-      ))}
     </div>
   );
 }
