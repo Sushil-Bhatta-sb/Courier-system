@@ -17,6 +17,7 @@ import ViewShipments from "./pages/admin/details/ViewShipments";
 import ViewModes from "./pages/admin/details/ViewModes";
 import ViewStaffs  from "./pages/admin/details/ViewStaffs";
 import ViewStatus from "./pages/admin/details/ViewStatus";
+import ViewShipment from "./pages/Staff/ViewShipment";
 
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
         <Route path="/customer/AddCustomer" element={<AddCustomer />} />
         <Route path="/customer/AddShipment" element={<AddShipment />} />
        <Route path="/staff" element={<StaffDsh />}>
-         <Route path="shipments" element={<ViewShipments />} />
+         <Route path="shipments" element={<ViewShipment />} />
        </Route>
         <Route path="/details" element={<DetailsDsh/>} />
         <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />

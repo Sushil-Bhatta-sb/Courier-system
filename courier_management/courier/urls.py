@@ -14,6 +14,6 @@ urlpatterns = [
     path('api/add_shipment/',views.add_shipment),
     path('api/get_shipments/',views.get_shipments),
     path('api/get_staff/',views.get_staff),
+    path('api/claim_shipment/',views.claim_shipment),
    
-
 ]

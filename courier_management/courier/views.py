@@ -135,33 +135,28 @@ def add_shipment(request):
 def get_shipments(request):
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT s.shipment_id,
-                   s.pickup_address,
-                   s.delivery_address,
-                   s.weight,
-                   s.cost,
-                   m.mode_name,
-                   st.status_name
-            FROM shipment s
-            JOIN mode_of_transport m ON s.mode_id = m.mode_id
-            JOIN status st ON s.status_id = st.status_id
-            ORDER BY s.shipment_id DESC
+            SELECT 
+                sh.shipment_id, sh.pickup_address, sh.delivery_address, 
+                sh.weight, sh.cost, m.mode_name, st.status_name, sh.staff_id
+            FROM shipment sh
+            JOIN mode_of_transport m ON sh.mode_id = m.mode_id
+            JOIN status st ON sh.status_id = st.status_id
         """)
         rows = cursor.fetchall()
 
-    data = []
+    shipments = []
     for r in rows:
-        data.append({
+        shipments.append({
             "id": r[0],
             "pickup": r[1],
             "delivery": r[2],
             "weight": r[3],
-            "cost": float(r[4]),
+            "cost": r[4],
             "mode": r[5],
             "status": r[6],
+            "staff_id": r[7], # IMPORTANT: React needs this to filter lists
         })
-
-    return JsonResponse(data, safe=False)
+    return JsonResponse(shipments, safe=False)
 
 def get_status(request):
     with connection.cursor() as cursor:
@@ -202,3 +197,25 @@ def get_staff(request):
     ]
 
     return JsonResponse(staff, safe=False)
+@csrf_exempt
+def claim_shipment(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            shipment_id = data.get("shipment_id")
+            staff_id = data.get("staff_id") # In a real app, get this from request.user.id
+
+            if not shipment_id or not staff_id:
+                return JsonResponse({"error": "Shipment and Staff ID required"}, status=400)
+
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    UPDATE shipment 
+                    SET staff_id = %s 
+                    WHERE shipment_id = %s
+                """, [staff_id, shipment_id])
+
+            return JsonResponse({"message": "Shipment successfully assigned to you!"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    return JsonResponse({"error": "POST required"}, status=405)
