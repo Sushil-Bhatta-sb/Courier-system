@@ -15,5 +15,5 @@ urlpatterns = [
     path('api/get_shipments/',views.get_shipments),
     path('api/get_staff/',views.get_staff),
     path('api/claim_shipment/',views.claim_shipment),
-   
+    path('api/update_shipment_status/', views.update_shipment_status, name='update_shipment_status'),
 ]
