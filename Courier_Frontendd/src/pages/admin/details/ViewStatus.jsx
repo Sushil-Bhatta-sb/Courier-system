@@ -10,8 +10,8 @@ export default function ViewStatus() {
   }, []);
 
   return (
-    <div style={{ padding: "25px" }}>
-      <h2>Status List</h2>
+    <div className="min-h-screen bg-slate-100 p-8">
+      <h2 className="text-2xl font-bold text-slate-800 mb-6">Status List</h2>
 
       {statuses.map(s => (
         <div key={s.id} style={card}>

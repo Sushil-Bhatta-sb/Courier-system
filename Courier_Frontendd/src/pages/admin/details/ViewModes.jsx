@@ -10,22 +10,27 @@ export default function ViewModes() {
   }, []);
 
   return (
-    <div style={{ padding: "25px" }}>
-      <h2>Transport Modes</h2>
+    <div className="min-h-screen bg-slate-100 p-8">
+      <h2 className="text-2xl font-bold text-slate-800 mb-6">
+        Transport Modes
+      </h2>
 
-      {modes.map(m => (
-        <div key={m.id} style={card}>
-          <p><b>Name:</b> {m.name}</p>
-          <p><b>Cost Multiplier:</b> {m.multiplier}</p>
-        </div>
-      ))}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modes.map(m => (
+          <div
+            key={m.id}
+            className="bg-white rounded-xl shadow-md p-5 border border-slate-200"
+          >
+            <p className="text-slate-700">
+              <span className="font-semibold">Name:</span> {m.name}
+            </p>
+            <p className="text-slate-700 mt-2">
+              <span className="font-semibold">Cost Multiplier:</span>{" "}
+              {m.multiplier}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-const card = {
-  border: "1px solid #ccc",
-  margin: "10px 0",
-  padding: "12px",
-  borderRadius: "6px"
-};
