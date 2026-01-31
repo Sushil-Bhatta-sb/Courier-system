@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -19,6 +20,11 @@ import ViewStaffs  from "./pages/admin/details/ViewStaffs";
 import ViewStatus from "./pages/admin/details/ViewStatus";
 import ViewShipment from "./pages/Staff/ViewShipment";
 
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
+import ProfileSettings from "./auth/ProfileSettings";
+import ForgotPassword from "./auth/ForgotPassword";
+import SetNewPassword from "./auth/SetNewPassword";
 
 export default function App() {
   return (
@@ -27,16 +33,27 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/reset-password" element={<ForgotPassword />} />
+        <Route path="/set-new-password" element={<SetNewPassword />} />
+        <Route path="/customer/settings" element={<ProfileSettings />} />
+
+       <Route path="/customer" element={<Navigate to="/customer/dashboard" replace />} />
+       <Route path="/customer/dashboard" element={<CustomerDsh />} />
+        <Route path="/customer/AddCustomer" element={<AddCustomer />} />
+        <Route path="/customer/AddShipment" element={<AddShipment />} />
+        
+        <Route path="/staff" element={<StaffDsh />}>
+          <Route path="shipments" element={<ViewShipment />} />
+        </Route>
+
         <Route path="/admin/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/admin/AddStaff" element={<AddStaff />} />
         <Route path="/admin/AddMode" element={<AddMode />} />
         <Route path="/admin/AddStatus" element={<AddStatus />} />
-        <Route path="/customer" element={<CustomerDsh />} />
-        <Route path="/customer/AddCustomer" element={<AddCustomer />} />
-        <Route path="/customer/AddShipment" element={<AddShipment />} />
-       <Route path="/staff" element={<StaffDsh />}>
-         <Route path="shipments" element={<ViewShipment />} />
-       </Route>
+  
         <Route path="/details" element={<DetailsDsh/>} />
         <Route path="/admin/details/ViewCostumers" element={<ViewCostumers/>} />
         <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
@@ -48,4 +65,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-

@@ -467,3 +467,32 @@ def update_shipment_status(request):
             return JsonResponse({"message": f"Shipment {status_name} with notes: {remarks}"})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
+@csrf_exempt
+def track_shipment(request, shipment_id):
+    try:
+        with connection.cursor() as cursor:
+            # Join with status table to get the status name instead of just the ID
+            cursor.execute("""
+                SELECT 
+                    sh.shipment_id, 
+                    sh.pickup_address, 
+                    sh.delivery_address, 
+                    sh.weight, 
+                    st.status_name 
+                FROM shipment sh
+                JOIN status st ON sh.status_id = st.status_id
+                WHERE sh.shipment_id = %s
+            """, [shipment_id])
+            row = cursor.fetchone()
+
+        if row:
+            return JsonResponse({
+                "id": row[0],
+                "pickup": row[1],
+                "delivery": row[2],
+                "weight": row[3],
+                "status": row[4]
+            })
+        return JsonResponse({"error": "Shipment not found"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

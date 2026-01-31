@@ -25,4 +25,5 @@ urlpatterns = [
 
     path('api/claim_shipment/',views.claim_shipment),
     path('api/update_shipment_status/', views.update_shipment_status, name='update_shipment_status'),
+    path('api/track/<int:shipment_id>/', views.track_shipment),
 ]
