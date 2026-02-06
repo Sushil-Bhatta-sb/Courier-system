@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.db import connection
 from datetime import date
+from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAdminUser
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import check_password, make_password
@@ -553,3 +556,18 @@ def admin_stats(request):
         "customers": customers,
         "staff": staff
     })
+
+@api_view(['POST'])
+@permission_classes([AllowAny]) # Anyone can attempt to login
+def admin_login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    
+    # This checks against the users created via createsuperuser
+    user = authenticate(username=username, password=password)
+    
+    if user is not None and user.is_staff:
+        login(request, user)
+        return JsonResponse({"message": "Login successful", "isAdmin": True}, status=200)
+    else:
+        return JsonResponse({"error": "Invalid credentials or not an admin"}, status=401)
