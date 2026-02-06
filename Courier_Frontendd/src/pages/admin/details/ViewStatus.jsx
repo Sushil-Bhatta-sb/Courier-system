@@ -10,21 +10,20 @@ export default function ViewStatus() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-100 p-8">
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">Status List</h2>
-
-      {statuses.map(s => (
-        <div key={s.id} style={card}>
-          <p><b>Status:</b> {s.name}</p>
+    <div className="min-h-screen bg-slate-50 p-8">
+      <div className="max-w-md mx-auto">
+        <h2 className="text-3xl font-extrabold text-slate-900 mb-8 text-center">Tracking Statuses</h2>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          {statuses.map((s, index) => (
+            <div key={s.id} className={`p-4 flex items-center gap-4 ${index !== statuses.length - 1 ? 'border-b border-slate-100' : ''}`}>
+              <span className="shrink-0 w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm">
+                {index + 1}
+              </span>
+              <p className="font-semibold text-slate-700 uppercase tracking-wide">{s.name}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
-
-const card = {
-  border: "1px solid #ccc",
-  margin: "10px 0",
-  padding: "12px",
-  borderRadius: "6px"
-};
