@@ -82,21 +82,28 @@ def add_staff(request):
 def add_shipment(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required"}, status=400)
-    data = json.loads(request.body)
-    customer_id = data.get("customer_id")
-    pickup_address = data.get("pickup_address")
-    delivery_address = data.get("delivery_address")
-    weight = float(data.get("weight"))
-    mode_id = data.get("mode_id")
-    status_id = data.get("status_id")
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
-        row = cursor.fetchone()
-    if not row or row[0] is None:
-        return JsonResponse({"error": "Invalid mode ID"}, status=400)
-    multiplier = float(row[0])
-    cost = weight * multiplier * 100
+
     try:
+        data = json.loads(request.body)
+        customer_id = data.get("customer_id")
+        pickup_address = data.get("pickup_address")
+        delivery_address = data.get("delivery_address")
+        weight = float(data.get("weight"))
+        mode_id = data.get("mode_id")
+        status_id = data.get("status_id")
+
+        # 1. Calculate Cost
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
+            row = cursor.fetchone()
+
+        if not row or row[0] is None:
+            return JsonResponse({"error": "Invalid mode ID"}, status=400)
+
+        multiplier = float(row[0])
+        cost = weight * multiplier * 100
+
+        # 2. Insert into Database
         with connection.cursor() as cursor:
             cursor.execute("""
                 INSERT INTO shipment 
@@ -105,15 +112,16 @@ def add_shipment(request):
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, [customer_id, None, mode_id, status_id, pickup_address, 
                   delivery_address, weight, cost, date.today()])
+        return JsonResponse({
+            "message": "Shipment booked successfully!",
+            "pickup_address": pickup_address,
+            "delivery_address": delivery_address,
+            "weight": weight,
+            "cost": cost
+        })
+
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
-    return JsonResponse({
-        "message": "Shipment booked successfully!",
-        "pickup_address": pickup_address,
-        "delivery_address": delivery_address,
-        "weight": weight,
-        "cost": cost
-    })
     
 def get_shipments(request):
     with connection.cursor() as cursor:
@@ -130,8 +138,8 @@ def get_shipments(request):
     for r in rows:
         shipments.append({
             "id": r[0],
-            "pickup": r[1],
-            "delivery": r[2],
+            "pickup_address": r[1],
+            "delivery_address": r[2],
             "weight": r[3],
             "cost": r[4],
             "mode": r[5],
@@ -447,26 +455,35 @@ def claim_shipment(request):
     return JsonResponse({"error": "POST required"}, status=405)
 
 @csrf_exempt
+@csrf_exempt
 def update_shipment_status(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            shipment_id = data.get("shipment_id")
-            status_name = data.get("status")
-            remarks = data.get("remarks", "") 
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT status_id FROM status WHERE status_name = %s", [status_name])
-                row = cursor.fetchone()
-                if not row: return JsonResponse({"error": "Status not found"}, status=400)
-                status_id = row[0]
-                cursor.execute("""
-                    UPDATE shipment 
-                    SET status_id = %s, remarks = %s 
-                    WHERE shipment_id = %s
-                """, [status_id, remarks, shipment_id])
-            return JsonResponse({"message": f"Shipment {status_name} with notes: {remarks}"})
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=400)
+
+    data = json.loads(request.body)
+    shipment_id = data.get("shipment_id")
+    new_status = data.get("status")  # "Shipped" or "Delivered"
+
+    with connection.cursor() as cursor:
+        # get status_id from name
+        cursor.execute(
+            "SELECT status_id FROM status WHERE status_name=%s",
+            [new_status]
+        )
+        row = cursor.fetchone()
+
+        if not row:
+            return JsonResponse({"error": "Invalid status"}, status=400)
+
+        status_id = row[0]
+
+        cursor.execute(
+            "UPDATE shipment SET status_id=%s WHERE shipment_id=%s",
+            [status_id, shipment_id]
+        )
+
+    return JsonResponse({"message": "Status updated"})
+
 @csrf_exempt
 def track_shipment(request, shipment_id):
     try:
@@ -496,3 +513,43 @@ def track_shipment(request, shipment_id):
         return JsonResponse({"error": "Shipment not found"}, status=404)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+def admin_stats(request):
+    with connection.cursor() as cursor:
+
+        # Total shipments
+        cursor.execute("SELECT COUNT(*) FROM shipment")
+        total_shipments = cursor.fetchone()[0]
+
+        # By status
+        cursor.execute("""
+            SELECT status_name, COUNT(*) 
+            FROM shipment 
+            JOIN status ON shipment.status_id = status.status_id
+            GROUP BY status_name
+        """)
+        status_rows = cursor.fetchall()
+
+        stats = { row[0]: row[1] for row in status_rows }
+
+        # Revenue
+        cursor.execute("SELECT COALESCE(SUM(cost),0) FROM shipment")
+        revenue = cursor.fetchone()[0]
+
+        # Customers
+        cursor.execute("SELECT COUNT(*) FROM customer")
+        customers = cursor.fetchone()[0]
+
+        # Staff
+        cursor.execute("SELECT COUNT(*) FROM staff")
+        staff = cursor.fetchone()[0]
+
+    return JsonResponse({
+        "total_shipments": total_shipments,
+        "booked": stats.get("booked", 0),
+        "shipped": stats.get("Shipped", 0),
+        "delivered": stats.get("Delivered", 0),
+        "revenue": float(revenue),
+        "customers": customers,
+        "staff": staff
+    })

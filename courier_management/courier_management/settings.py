@@ -2,17 +2,16 @@
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# Email Configuration (for production)
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # or your email provider
+EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your_email@gmail.com'
@@ -29,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'courier',
     'rest_framework',
-    'corsheaders', 
+    'corsheaders',
+   
 
 ]
 
@@ -73,6 +73,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'courier_management.wsgi.application'
 
 
+
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -87,6 +89,7 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

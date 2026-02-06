@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/auth/set-new-password/', views.set_new_password),
     path('api/auth/change-email/', views.change_email),
     path('api/auth/change-password/', views.change_password),
+    path('api/admin/stats/',views.admin_stats),
 
     path('api/claim_shipment/',views.claim_shipment),
     path('api/update_shipment_status/', views.update_shipment_status, name='update_shipment_status'),

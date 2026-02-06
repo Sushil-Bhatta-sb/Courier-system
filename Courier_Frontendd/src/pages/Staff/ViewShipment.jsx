@@ -14,7 +14,7 @@ export default function ViewShipment({ shipment, onUpdate }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         shipment_id: shipment.id, 
-        status: "delivered",
+        status: "Delivered",
         remarks: remarks 
       }),
     })
@@ -25,7 +25,7 @@ export default function ViewShipment({ shipment, onUpdate }) {
   };
 
   return (
-    <div className={`p-5 rounded-xl border-l-4 shadow-sm ${shipment.status === 'delivered' ? 'bg-slate-50 border-slate-300' : 'bg-white border-emerald-500'}`}>
+    <div className={`p-5 rounded-xl border-l-4 shadow-sm ${shipment.status === 'Delivered' ? 'bg-slate-50 border-slate-300' : 'bg-white border-emerald-500'}`}>
       <div className="flex justify-between mb-2">
         <p className="font-bold text-slate-700">ID #{shipment.id}</p>
         <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{shipment.status}</span>
@@ -33,7 +33,7 @@ export default function ViewShipment({ shipment, onUpdate }) {
       
       <p className="text-sm"><b>Destination:</b> {shipment.delivery}</p>
       
-      {shipment.status !== "delivered" ? (
+      {shipment.status !== "Delivered" ? (
         <div className="mt-4 pt-4 border-t border-slate-100 space-y-3">
           <textarea 
             rows="2"

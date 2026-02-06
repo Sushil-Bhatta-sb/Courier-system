@@ -19,7 +19,7 @@ import ViewShipments from "./pages/admin/details/ViewShipments";
 import ViewModes from "./pages/admin/details/ViewModes";
 import ViewStaffs from "./pages/admin/details/ViewStaffs";
 import ViewStatus from "./pages/admin/details/ViewStatus";
-
+import AdminStats from "./pages/admin/AdminStats";
 // Customer Section Components
 import CustomerDsh from "./pages/customer/CustomerDsh";
 import AddCustomer from "./pages/customer/AddCustomer"; 
@@ -31,18 +31,10 @@ import ViewShipment from "./pages/Staff/ViewShipment";
 
 // Auth Components
 import Login from "./auth/Login";
-import AdminLogin from "./auth/AdminLogin"; // The new file we created
 import Signup from "./auth/Signup";
 import ProfileSettings from "./auth/ProfileSettings";
 import ForgotPassword from "./auth/ForgotPassword";
 import SetNewPassword from "./auth/SetNewPassword";
-
-// --- ADMIN GUARD COMPONENT ---
-// This checks if 'isAdmin' is set in localStorage before showing the page
-const AdminGuard = ({ children }) => {
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
-  return isAdmin ? children : <Navigate to="/admin/login" replace />;
-};
 
 export default function App() {
   return (
@@ -57,23 +49,20 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/reset-password" element={<ForgotPassword />} />
           <Route path="/set-new-password" element={<SetNewPassword />} />
-          
-          {/* ADMIN LOGIN GATE */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-
+      
           {/* PROTECTED ADMIN ROUTES */}
-          <Route path="/admin/AdminDashboard" element={<AdminGuard><AdminDashboard /></AdminGuard>} />
-          <Route path="/admin/AddStaff" element={<AdminGuard><AddStaff /></AdminGuard>} />
-          <Route path="/admin/AddMode" element={<AdminGuard><AddMode /></AdminGuard>} />
-          <Route path="/admin/AddStatus" element={<AdminGuard><AddStatus /></AdminGuard>} />
-          
+          <Route path="/admin/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/admin/AddStaff" element={<AddStaff />} />
+          <Route path="/admin/AddMode" element={<AddMode />} />
+          <Route path="/admin/AddStatus" element={<AddStatus />} />
+          <Route path="/admin/stats" element={<AdminStats />} />
           {/* PROTECTED ADMIN DETAILS SECTION */}
-          <Route path="/details" element={<AdminGuard><DetailsDsh /></AdminGuard>} />
-          <Route path="/admin/details/ViewCostumers" element={<AdminGuard><ViewCostumers /></AdminGuard>} />
-          <Route path="/admin/details/ViewShipments" element={<AdminGuard><ViewShipments /></AdminGuard>} />
-          <Route path="/admin/details/ViewModes" element={<AdminGuard><ViewModes /></AdminGuard>} />
-          <Route path="/admin/details/ViewStaffs" element={<AdminGuard><ViewStaffs /></AdminGuard>} />
-          <Route path="/admin/details/ViewStatus" element={<AdminGuard><ViewStatus /></AdminGuard>} />
+          <Route path="/details" element={<DetailsDsh />} />
+          <Route path="/admin/details/ViewCostumers" element={<ViewCostumers />} />
+          <Route path="/admin/details/ViewShipments" element={<ViewShipments />} />
+          <Route path="/admin/details/ViewModes" element={<ViewModes />} />
+          <Route path="/admin/details/ViewStaffs" element={<ViewStaffs />} />
+          <Route path="/admin/details/ViewStatus" element={<ViewStatus />} />
 
           {/* CUSTOMER ROUTES */}
           {/* Redirect base /customer to the dashboard */}

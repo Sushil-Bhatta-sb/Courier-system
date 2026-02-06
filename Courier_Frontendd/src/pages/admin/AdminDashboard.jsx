@@ -8,7 +8,9 @@ export default function AdminDashboard() {
         Admin Control Panel
       </h2>
 
+      {/* GRID CONTAINER */}
       <div className="max-w-5xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+
         <Link
           to="/admin/AddStaff"
           className="bg-white shadow-lg rounded-xl p-6 text-center hover:scale-105 transition"
@@ -50,6 +52,17 @@ export default function AdminDashboard() {
           <h3 className="text-lg font-semibold">View System Details</h3>
           <p className="text-sm mt-2">
             Customers, shipments, staff & more
+          </p>
+        </Link>
+
+        <Link
+          to="/admin/stats"
+          className="bg-emerald-600 text-white shadow-lg rounded-xl p-6 text-center hover:bg-emerald-700 transition"
+        >
+          <div className="text-4xl mb-3">📈</div>
+          <h3 className="text-lg font-semibold">System Analytics</h3>
+          <p className="text-sm mt-2">
+            Revenue, shipments, performance
           </p>
         </Link>
 
