@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+
 export default function Home() {
   return (
     <div
@@ -22,23 +24,24 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4">
-            <a
-              href="/admin/AddShipment"
+            {/* Changed href to "to" and <a> to <Link> */}
+            <p
+              to="/customer/AddShipment"
               className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition"
             >
               Book Your Shipment
-            </a>
+            </p>
 
-            <a
-              href="/admin/AdminDashboard"
+            {/* Path corrected to "/admin" to match your App.jsx route */}
+            <Link
+              to="/admin-login"
               className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition"
             >
               Admin
-            </a>
+            </Link>
           </div>
         </div>
 
-  
         <div className="hidden md:block">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
             <h3 className="text-xl font-semibold mb-4 text-yellow-300">
@@ -54,7 +57,6 @@ export default function Home() {
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   );

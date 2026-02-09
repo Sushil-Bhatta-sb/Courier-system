@@ -46,113 +46,172 @@ export default function CustomerDsh() {
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            await fetch("http://127.0.0.1:8000/api/auth/logout/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ customer_id: customerId }),
-            });
-        } finally {
-            localStorage.removeItem("customerId");
-            navigate("/login");
-        }
+    const handleLogout = () => {
+        localStorage.removeItem("customerId");
+        navigate("/login");
     };
 
     const currentStatus = shipment?.status?.toLowerCase() || "";
     const statusIndex = steps.indexOf(currentStatus);
 
     return (
-        <div className="min-h-screen bg-slate-50 p-4 md:p-6 flex flex-col gap-6 font-sans">
-            {/* TOP NAVIGATION BAR */}
-            <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                <div className="flex items-center gap-4">
-                    <h1 className="text-xl font-black text-blue-600 tracking-tight mr-4">LogiTrack</h1>
-                    <div className="flex gap-2">
-                        <Link to="/customer/AddCustomer" className="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 transition">
-                            Profile
-                        </Link>
-                        <Link to="/customer/AddShipment" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
-                            + New Shipment
-                        </Link>
+        <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-indigo-100">
+            {/* --- TOP NAV: Frosted Glass Effect --- */}
+            <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+                <div className="flex items-center gap-10">
+                    <h1 className="text-2xl font-black bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">
+                        LOGI<span className="text-slate-400">.</span>
+                    </h1>
+                    <div className="hidden md:flex items-center gap-8">
+                        <Link to="/customer/dashboard" className="text-sm font-bold text-indigo-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600">Dashboard</Link>
+                        <Link to="/customer/AddCustomer" className="text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors">Settings</Link>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className="flex bg-slate-50 rounded-xl border border-slate-200 p-1 group focus-within:border-blue-400 transition-all">
+                <div className="flex items-center gap-6">
+                    <div className="hidden sm:flex items-center bg-slate-100/50 rounded-2xl px-4 py-2 border border-slate-200/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
                         <input 
                             type="text" 
                             placeholder="Tracking ID..." 
-                            className="bg-transparent px-3 py-1.5 text-sm outline-none w-32 md:w-48 text-slate-600 font-medium"
+                            className="bg-transparent border-none outline-none text-xs font-bold w-40 placeholder:text-slate-400"
                             value={searchId}
                             onChange={(e) => setSearchId(e.target.value)}
                         />
-                        <button 
-                            onClick={handleSearch}
-                            className="bg-slate-900 text-white px-5 py-1.5 rounded-lg text-sm font-bold hover:bg-black transition active:scale-95"
-                        >
+                        <button onClick={handleSearch} className="text-indigo-600 font-black text-[10px] uppercase tracking-widest ml-2 hover:opacity-70">
                             {loading ? "..." : "Track"}
                         </button>
                     </div>
-                    <button onClick={handleLogout} className="text-slate-400 hover:text-red-500 transition text-sm font-bold px-2">
-                        Logout
+                    <button onClick={handleLogout} className="text-slate-400 hover:text-rose-500 text-xs font-bold transition-colors">
+                        Sign Out
                     </button>
                 </div>
-            </div>
+            </nav>
 
-            {/* MAIN CONTENT AREA */}
-            <div className="grow w-full flex items-center justify-center relative overflow-hidden bg-white rounded-3xl border border-slate-200 shadow-sm min-h-[500px]">
-                <div className="absolute inset-0 opacity-40 pointer-events-none">
-                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full blur-3xl"></div>
-                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-50 rounded-full blur-3xl"></div>
-                </div>
+            <main className="max-w-7xl mx-auto p-8 md:p-12">
+                {/* --- HEADER --- */}
+                <header className="mb-12">
+                    <span className="text-indigo-600 font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">Customer Portal</span>
+                    <h2 className="text-5xl font-black tracking-tight text-slate-900 mb-2">Track your <span className="text-indigo-600">Journey.</span></h2>
+                    <p className="text-slate-400 font-medium text-lg">Manage your logistics and real-time shipments.</p>
+                </header>
 
-                <div className="relative z-10 w-full max-w-4xl p-6 md:p-12">
-                    {shipment ? (
-                        <div className="space-y-12">
-                            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-slate-100 pb-8">
-                                <div>
-                                    <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest">Active Shipment</span>
-                                    <h3 className="text-slate-900 font-black text-4xl md:text-5xl mt-4 tracking-tighter">#{shipment.id}</h3>
-                                    <div className="mt-4">
-                                        <p className="text-slate-400 text-xs uppercase font-bold tracking-wider">Destination</p>
-                                        <p className="text-slate-700 font-bold text-lg">{shipment.delivery_address || shipment.delivery}</p>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    {/* --- SHIPMENT CARD: The Hero --- */}
+                    <div className="lg:col-span-8 group">
+                        <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-[0_30px_100px_rgba(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_30px_100px_rgba(79,70,229,0.08)] transition-all duration-500 relative overflow-hidden">
+                            {/* Decorative background circle */}
+                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors duration-500"></div>
+                            
+                            {shipment ? (
+                                <div className="relative z-10">
+                                    <div className="flex justify-between items-center mb-16">
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <div className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></div>
+                                                <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Current Parcel</p>
+                                            </div>
+                                            <h3 className="text-6xl font-black tracking-tighter text-slate-900 leading-none">#{shipment.id}</h3>
+                                        </div>
+                                        <Link to="/customer/AddShipment" className="bg-slate-900 text-white px-8 py-4 rounded-3xl font-bold text-sm shadow-2xl shadow-slate-200 hover:-translate-y-1 transition-all active:scale-95">
+                                            + New Order
+                                        </Link>
+                                    </div>
+
+                                    {/* PROGRESS TRACKER */}
+                                    <div className="relative mb-20">
+                                        <div className="absolute top-7 left-2 right-2 h-1.5 bg-slate-100 rounded-full"></div>
+                                        <div 
+                                            className="absolute top-7 left-2 h-1.5 bg-linear-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-1000 ease-in-out shadow-[0_0_20px_rgba(79,70,229,0.4)]"
+                                            style={{ width: `${(statusIndex / (steps.length - 1)) * 97}%` }}
+                                        ></div>
+                                        
+                                        <div className="flex justify-between relative z-10 px-0">
+                                            {steps.map((step, index) => (
+                                                <div key={index} className="flex flex-col items-center">
+                                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border-4 transition-all duration-700 ${
+                                                        index <= statusIndex 
+                                                        ? 'bg-white border-indigo-600 shadow-xl scale-110 rotate-3' 
+                                                        : 'bg-slate-50 border-white text-slate-300'
+                                                    }`}>
+                                                        {index <= statusIndex ? (
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L7 11.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                        ) : (
+                                                            <div className="w-2 h-2 bg-slate-200 rounded-full"></div>
+                                                        )}
+                                                    </div>
+                                                    <p className={`mt-6 text-[11px] font-black uppercase tracking-[0.15em] ${index <= statusIndex ? 'text-indigo-600' : 'text-slate-300'}`}>
+                                                        {step}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-12 p-10 bg-slate-50/50 rounded-4xl border border-slate-100">
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Destination</p>
+                                            <p className="text-xl font-bold text-slate-800">{shipment.delivery_address || shipment.delivery}</p>
+                                        </div>
+                                        <div className="space-y-1 text-right">
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Parcel Weight</p>
+                                            <p className="text-xl font-bold text-slate-800">{shipment.weight} <span className="text-slate-400 font-medium">kg</span></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 min-w-[200px] w-full md:w-auto text-right">
-                                    <p className="text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Weight</p>
-                                    <p className="text-slate-900 text-4xl font-black">{shipment.weight} <span className="text-lg text-slate-400 font-medium">KG</span></p>
-                                    <div className="mt-4 bg-green-500 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase inline-block">{shipment.status}</div>
+                            ) : (
+                                <div className="py-24 text-center">
+                                    <div className="w-24 h-24 bg-slate-50 rounded-4xl flex items-center justify-center mx-auto mb-8 border border-slate-100">
+                                        <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                                    </div>
+                                    <h2 className="text-3xl font-black text-slate-800 tracking-tight">No active packages</h2>
+                                    <Link to="/customer/AddShipment" className="mt-6 inline-block bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold hover:shadow-lg hover:shadow-indigo-200 transition-all">Start Shipment</Link>
                                 </div>
-                            </div>
+                            )}
+                        </div>
+                    </div>
 
-                            <div className="relative pt-8 pb-4">
-                                <div className="absolute top-[44px] left-4 right-4 h-1.5 bg-slate-100 rounded-full"></div>
-                                <div className="absolute top-[44px] left-4 h-1.5 bg-blue-500 rounded-full transition-all duration-1000 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-                                    style={{ width: `${(statusIndex / (steps.length - 1)) * 96}%` }}></div>
-                                <div className="flex justify-between relative z-10">
-                                    {steps.map((step, index) => (
-                                        <div key={index} className="flex flex-col items-center">
-                                            <div className={`w-8 h-8 rounded-full border-4 transition-all duration-500 flex items-center justify-center ${index <= statusIndex ? 'bg-blue-600 border-white shadow-lg scale-110' : 'bg-white border-slate-200'}`}>
-                                                {index <= statusIndex && <div className="w-2 h-2 bg-white rounded-full"></div>}
-                                            </div>
-                                            <span className={`text-[10px] md:text-[11px] mt-4 font-black uppercase tracking-widest ${index <= statusIndex ? 'text-blue-600' : 'text-slate-300'}`}>{step}</span>
-                                        </div>
-                                    ))}
+                    {/* --- SIDEBAR: Utility Cards --- */}
+                    <div className="lg:col-span-4 space-y-8">
+                        <div className="bg-indigo-600 rounded-[2.5rem] p-10 text-white shadow-2xl shadow-indigo-200 flex flex-col justify-between h-75">
+                            <div>
+                                <h4 className="text-2xl font-bold mb-3 tracking-tight">Courier Support</h4>
+                                <p className="text-indigo-100/80 text-sm font-medium leading-relaxed">Having trouble with a delivery? Our 24/7 team is ready to assist.</p>
+                            </div>
+                            <button className="bg-white text-indigo-600 w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-50 transition-colors shadow-lg">
+                                Get Help Now
+                            </button>
+                        </div>
+
+                        <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                            <h4 className="font-black text-slate-900 mb-8 flex justify-between items-center">
+                                Timeline 
+                                <span className="text-[10px] bg-slate-100 text-slate-400 px-3 py-1 rounded-full uppercase">Today</span>
+                            </h4>
+                            <div className="space-y-8">
+                                <div className="flex gap-5">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50 mt-2"></div>
+                                    <div>
+                                        <p className="text-xs font-bold text-slate-800 tracking-tight">System Notification</p>
+                                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5">Your profile was updated successfully.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-5 opacity-40">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 ring-4 ring-slate-50 mt-2"></div>
+                                    <div>
+                                        <p className="text-xs font-bold text-slate-800 tracking-tight">No recent logs</p>
+                                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5">Tracking for next shipment.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    ) : (
-                        <div className="text-center">
-                            <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-slate-100">
-                                <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                            </div>
-                            <h2 className="text-2xl font-black text-slate-800 tracking-tight">Track your Parcel</h2>
-                            <p className="text-slate-400 mt-2 max-w-xs mx-auto text-sm">Enter your tracking number above to see the live status of your shipment.</p>
-                        </div>
-                    )}
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }

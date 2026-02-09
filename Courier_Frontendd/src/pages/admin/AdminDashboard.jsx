@@ -45,7 +45,7 @@ export default function AdminDashboard() {
         </Link>
 
         <Link
-          to="/details"
+          to="/admin/details"
           className="bg-indigo-600 text-white shadow-lg rounded-xl p-6 text-center hover:bg-indigo-700 transition"
         >
           <div className="text-4xl mb-3">📊</div>

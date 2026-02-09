@@ -48,7 +48,6 @@ export default function DetailsDsh() {
   return (
     <div className="min-h-screen bg-[#1e293b] p-8 font-sans text-slate-200">
       <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
         <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h1 className="text-4xl font-black tracking-tight text-white">
@@ -64,8 +63,6 @@ export default function DetailsDsh() {
             </span>
           </div>
         </header>
-
-        {/* Dashboard Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {menuItems.map((item, idx) => (
             <Link
@@ -73,12 +70,11 @@ export default function DetailsDsh() {
               to={item.path}
               className="group relative bg-[#334155]/40 hover:bg-[#334155]/60 border border-slate-700 rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-2xl"
             >
-              {/* Subtle Gradient Glow on Hover */}
-              <div className={`absolute -inset-px bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}></div>
+              <div className={`absolute -inset-px bg-linear-to-r ${item.accent} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}></div>
 
               <div>
                 <div className="flex justify-between items-start mb-8">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 text-white`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${item.accent} flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 text-white`}>
                     {item.icon}
                   </div>
                   <span className="text-[9px] font-bold uppercase tracking-tighter bg-slate-800 text-slate-400 px-3 py-1 rounded-full border border-slate-700 group-hover:border-slate-500 transition-colors">
@@ -104,8 +100,6 @@ export default function DetailsDsh() {
             </Link>
           ))}
         </div>
-
-        {/* System Footer Info */}
         <footer className="mt-20 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em]">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
