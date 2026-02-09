@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['courier-system-kf4b.onrender.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
