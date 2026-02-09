@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp'
@@ -49,6 +50,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "http://localhost:5173",  
     "http://127.0.0.1:5173",
+    "https://Courier_Frontendd.vercel.app",
+
 ]
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = False 
@@ -78,17 +81,13 @@ WSGI_APPLICATION = 'courier_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'courierinfo',  
-        'USER': 'postgres',            
-        'PASSWORD': 'sushil123@#',    
-        'HOST': 'localhost',            
-        'PORT': '5432',                
-    }
-}
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://postgres:sushil123@#@localhost:5432/courierinfo',
+        conn_max_age=600
+    )
+}
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -131,5 +130,7 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
