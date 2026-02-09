@@ -91,7 +91,6 @@ export default function CustomerDsh() {
             </nav>
 
             <main className="max-w-7xl mx-auto p-8 md:p-12">
-                {/* --- HEADER --- */}
                 <header className="mb-12">
                     <span className="text-indigo-600 font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">Customer Portal</span>
                     <h2 className="text-5xl font-black tracking-tight text-slate-900 mb-2">Track your <span className="text-indigo-600">Journey.</span></h2>
@@ -99,10 +98,8 @@ export default function CustomerDsh() {
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                    {/* --- SHIPMENT CARD: The Hero --- */}
                     <div className="lg:col-span-8 group">
                         <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-[0_30px_100px_rgba(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_30px_100px_rgba(79,70,229,0.08)] transition-all duration-500 relative overflow-hidden">
-                            {/* Decorative background circle */}
                             <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors duration-500"></div>
                             
                             {shipment ? (
@@ -119,15 +116,12 @@ export default function CustomerDsh() {
                                             + New Order
                                         </Link>
                                     </div>
-
-                                    {/* PROGRESS TRACKER */}
                                     <div className="relative mb-20">
                                         <div className="absolute top-7 left-2 right-2 h-1.5 bg-slate-100 rounded-full"></div>
                                         <div 
                                             className="absolute top-7 left-2 h-1.5 bg-linear-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-1000 ease-in-out shadow-[0_0_20px_rgba(79,70,229,0.4)]"
                                             style={{ width: `${(statusIndex / (steps.length - 1)) * 97}%` }}
                                         ></div>
-                                        
                                         <div className="flex justify-between relative z-10 px-0">
                                             {steps.map((step, index) => (
                                                 <div key={index} className="flex flex-col items-center">
@@ -174,8 +168,6 @@ export default function CustomerDsh() {
                             )}
                         </div>
                     </div>
-
-                    {/* --- SIDEBAR: Utility Cards --- */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="bg-indigo-600 rounded-[2.5rem] p-10 text-white shadow-2xl shadow-indigo-200 flex flex-col justify-between h-75">
                             <div>
@@ -186,7 +178,6 @@ export default function CustomerDsh() {
                                 Get Help Now
                             </button>
                         </div>
-
                         <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
                             <h4 className="font-black text-slate-900 mb-8 flex justify-between items-center">
                                 Timeline 

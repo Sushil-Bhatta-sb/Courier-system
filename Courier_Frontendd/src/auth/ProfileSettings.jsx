@@ -33,8 +33,6 @@ export default function ProfileSettings() {
         <div className="min-h-screen bg-slate-50 p-8">
             <button onClick={() => navigate(-1)} className="mb-6 text-blue-600 font-bold">← Back to Dashboard</button>
             <div className="max-w-2xl mx-auto space-y-8">
-                
-                {/* CHANGE EMAIL SECTION */}
                 <form onSubmit={handleEmailChange} className="bg-white p-6 rounded-xl shadow-md">
                     <h2 className="text-xl font-bold mb-4">Update Email Address</h2>
                     <input type="password" placeholder="Current Password" 
@@ -45,8 +43,6 @@ export default function ProfileSettings() {
                         onChange={(e) => setEmailData({...emailData, new_email: e.target.value})} />
                     <button className="bg-blue-600 text-white px-4 py-2 rounded">Update Email</button>
                 </form>
-
-                {/* CHANGE PASSWORD SECTION */}
                 <form onSubmit={handlePasswordChange} className="bg-white p-6 rounded-xl shadow-md">
                     <h2 className="text-xl font-bold mb-4">Change Security Password</h2>
                     <input type="password" placeholder="Current Password" 
