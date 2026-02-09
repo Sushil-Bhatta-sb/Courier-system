@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['courier-system-kf4b.onrender.com']
+ALLOWED_HOSTS = ['courier-system-kf4b.onrender.com', 'localhost', '127.0.0.1']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
@@ -88,8 +88,6 @@ DATABASES = {
         'PORT': '5432',                
     }
 }
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
