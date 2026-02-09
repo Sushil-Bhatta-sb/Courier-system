@@ -9,7 +9,7 @@ export default function AdminLogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     // This calls Django's built-in auth or a custom endpoint
-    const response = await fetch("http://127.0.0.1:8000/api/logins/", {
+    const response = await fetch("https://courier-system-kf4b.onrender.com/api/logins/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds),
