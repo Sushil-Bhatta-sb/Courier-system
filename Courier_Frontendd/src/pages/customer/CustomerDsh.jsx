@@ -7,7 +7,8 @@ export default function CustomerDsh() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     
-    const customerId = localStorage.getItem("customerId");
+    // CHANGED TO sessionStorage: This wipes when the tab closes
+    const customerId = sessionStorage.getItem("customerId");
     const steps = ["booked", "picked up", "in transit", "delivered"];
 
     useEffect(() => {
@@ -47,7 +48,8 @@ export default function CustomerDsh() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("customerId");
+        // CHANGED TO sessionStorage
+        sessionStorage.removeItem("customerId");
         navigate("/login");
     };
 

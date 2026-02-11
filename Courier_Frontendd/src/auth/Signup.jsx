@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import  API_URL  from "../pages/apiConfig";
+import API_URL from "../pages/apiConfig";
+
 export default function Signup() {
     const [formData, setFormData] = useState({
         name: "", email: "", phone: "", address: "", password: ""
@@ -22,7 +23,7 @@ export default function Signup() {
                 alert("Account created! Please login.");
                 navigate("/login");
             } else {
-                alert(data.error);
+                alert(data.error || "Signup failed");
             }
         } catch (err) {
             alert("Connection error");
