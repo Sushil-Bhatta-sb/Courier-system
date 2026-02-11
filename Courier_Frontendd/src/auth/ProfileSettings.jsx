@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import  API_URL  from "../pages/apiConfig";
 export default function ProfileSettings() {
     const customerId = localStorage.getItem("customerId");
     const [emailData, setEmailData] = useState({ current_password: "", new_email: "" });
@@ -9,7 +9,7 @@ export default function ProfileSettings() {
 
     const handleEmailChange = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://127.0.0.1:8000/api/auth/change-email/", {
+        const res = await fetch(`${API_URL}/auth/change-email/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ customer_id: customerId, ...emailData }),
@@ -20,7 +20,7 @@ export default function ProfileSettings() {
 
     const handlePasswordChange = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://127.0.0.1:8000/api/auth/change-password/", {
+        const res = await fetch(`${API_URL}/auth/change-password/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ customer_id: customerId, ...passData }),

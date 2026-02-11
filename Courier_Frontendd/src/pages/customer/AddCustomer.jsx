@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import API_URL from '../apiConfig';
 export default function AddCustomer() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -8,7 +8,7 @@ export default function AddCustomer() {
   const [msg, setMsg] = useState("");
 
   const addCustomer = () => {
-    fetch("http://127.0.0.1:8000/api/add_customer/", {
+    fetch(`${API_URL}/add_customer/`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ name, phone, email, address })

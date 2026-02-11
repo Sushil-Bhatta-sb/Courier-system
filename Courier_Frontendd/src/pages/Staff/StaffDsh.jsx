@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast"; 
 import ViewShipment from "./ViewShipment"; 
-
+import API_URL from '../apiConfig';
 export default function StaffDsh() {
   const [shipments, setShipments] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
@@ -9,7 +9,7 @@ export default function StaffDsh() {
   const loggedInStaffId = 1; // Replace later with auth user id
 
   const fetchData = () => {
-    fetch("http://127.0.0.1:8000/api/get_shipments/")
+    fetch(`${API_URL}/get_shipments/`)
       .then((res) => res.json())
       .then((data) => setShipments(data))
       .catch((err) => console.error("Error fetching shipments:", err));
@@ -19,7 +19,7 @@ export default function StaffDsh() {
   }, []);
 
   const handleClaim = (shipmentId) => {
-    const claimPromise = fetch("http://127.0.0.1:8000/api/claim_shipment/", {
+    const claimPromise = fetch(`${API_URL}/claim_shipment/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

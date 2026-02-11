@@ -1,12 +1,12 @@
 import { useState } from "react";
-
+import API_URL from '../apiConfig';
 export default function AddModePage() {
   const [name, setName] = useState("");
   const [multiplier, setMultiplier] = useState("");
   const [msg, setMsg] = useState("");
 
   const addMode = () => {
-    fetch("http://127.0.0.1:8000/api/add_mode/", {
+    fetch(`${API_URL}/add_mode/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mode_name: name, cost_multiplier: multiplier })

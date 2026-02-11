@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import API_URL from '../apiConfig';
 export default function ViewShipment({ shipment, onUpdate }) {
   const [remarks, setRemarks] = useState("");
 
@@ -9,7 +9,7 @@ export default function ViewShipment({ shipment, onUpdate }) {
       return;
     }
 
-    fetch("http://127.0.0.1:8000/api/update_shipment_status/", {
+    fetch(`${API_URL}/update_shipment_status/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 

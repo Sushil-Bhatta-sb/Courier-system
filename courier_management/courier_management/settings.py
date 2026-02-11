@@ -1,7 +1,6 @@
 
 from pathlib import Path
 import os
-import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp'
@@ -9,7 +8,7 @@ SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
@@ -50,14 +49,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "http://localhost:5173",  
     "http://127.0.0.1:5173",
-    "https://courier-system-two.vercel.app",
-
 ]
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = False 
 CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'courier_management.urls'
-
+# TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -81,13 +78,19 @@ WSGI_APPLICATION = 'courier_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://postgres:sushil123@#@localhost:5432/courierinfo',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'courierinfo',  
+        'USER': 'postgres',            
+        'PASSWORD': 'sushil123@#',    
+        'HOST': 'localhost',            
+        'PORT': '5432',                
+    }
 }
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -130,7 +133,5 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 

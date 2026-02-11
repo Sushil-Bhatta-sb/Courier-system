@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import API_URL from '../apiConfig';
 export default function AddShipment() {
   const [modes, setModes] = useState([]);
   const [statuses, setStatuses] = useState([]);
@@ -8,14 +8,14 @@ export default function AddShipment() {
   const [form, setForm] = useState({});
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_mode/").then(res => res.json()).then(data => setModes(data));
-    fetch("http://127.0.0.1:8000/api/get_status/").then(res => res.json()).then(data => setStatuses(data));
+    fetch(`${API_URL}/get_mode/`).then(res => res.json()).then(data => setModes(data));
+    fetch(`${API_URL}/get_status/`).then(res => res.json()).then(data => setStatuses(data));
   }, []);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const addShipment = () => {
-    fetch("http://127.0.0.1:8000/api/add_shipment/", {
+    fetch(`${API_URL}/add_shipment/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

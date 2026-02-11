@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import API_URL from '../../apiConfig';
 export default function ViewStatus() {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_status/")
+    fetch(`${API_URL}/get_status/`)
       .then(res => res.json())
       .then(data => setStatuses(data));
   }, []);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import API_URL from '../apiConfig';
 export default function CustomerDsh() {
     const [shipment, setShipment] = useState(null);
     const [searchId, setSearchId] = useState("");
@@ -16,7 +16,7 @@ export default function CustomerDsh() {
             return;
         }
 
-        fetch("http://127.0.0.1:8000/api/get_shipments/")
+        fetch(`${API_URL}/get_shipments/`)
             .then(res => res.json())
             .then(data => {
                 const myShipments = data.filter(s => s.customer_id === parseInt(customerId));
@@ -31,7 +31,7 @@ export default function CustomerDsh() {
         if (!searchId) return;
         setLoading(true);
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/track/${searchId}/`);
+            const res = await fetch(`${API_URL}/track/${searchId}/`);
             const data = await res.json();
             if (res.ok) {
                 setShipment(data);

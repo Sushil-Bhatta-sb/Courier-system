@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import  API_URL  from "../pages/apiConfig";
 export default function SetNewPassword() {
     const [customerId, setCustomerId] = useState("");
     const [token, setToken] = useState("");
@@ -11,7 +11,7 @@ export default function SetNewPassword() {
         e.preventDefault();
         
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/auth/set-new-password/", {
+            const res = await fetch(`${API_URL}/auth/set-new-password/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

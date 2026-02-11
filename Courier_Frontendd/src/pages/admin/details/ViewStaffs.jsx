@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import API_URL from '../../apiConfig';
 export default function ViewStaffs() {
   const [staffs, setStaffs] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_staff/")
+    fetch(`${API_URL}/get_staff/`)
       .then(res => res.json())
       .then(data => setStaffs(data));
   }, []);

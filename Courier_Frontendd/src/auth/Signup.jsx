@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
+import  API_URL  from "../pages/apiConfig";
 export default function Signup() {
     const [formData, setFormData] = useState({
         name: "", email: "", phone: "", address: "", password: ""
@@ -12,7 +12,7 @@ export default function Signup() {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/auth/signup/", {
+            const res = await fetch(`${API_URL}/auth/signup/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

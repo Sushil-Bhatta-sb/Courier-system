@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import API_URL from '../../apiConfig';
 export default function ViewModes() {
   const [modes, setModes] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_mode/")
+    fetch(`${API_URL}/get_mode/`)
       .then(res => res.json())
       .then(data => setModes(data));
   }, []);

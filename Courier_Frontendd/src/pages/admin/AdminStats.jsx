@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import API_URL from '../apiConfig';
 export default function AdminStats() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/admin/stats/")
+    fetch(`${API_URL}/admin/stats/`)
       .then(res => res.json())
       .then(data => setStats(data));
   }, []);

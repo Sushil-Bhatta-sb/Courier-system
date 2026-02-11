@@ -1,11 +1,11 @@
 import { useState } from "react";
-
+import API_URL from '../apiConfig';
 export default function AddStatus() {
   const [name, setName] = useState("");
   const [msg, setMsg] = useState("");
 
   const addStatus = () => {
-    fetch("http://127.0.0.1:8000/api/add_status/", {
+    fetch(`${API_URL}/add_status/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status_name: name })  

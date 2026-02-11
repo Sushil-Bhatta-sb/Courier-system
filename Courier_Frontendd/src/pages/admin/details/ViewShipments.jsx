@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import API_URL from '../../apiConfig';
 export default function ViewShipments() {
   const [shipments, setShipments] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_shipments/")
+    fetch(`${API_URL}/get_shipments/`)
       .then((res) => res.json())
       .then((data) => setShipments(data));
   }, []);

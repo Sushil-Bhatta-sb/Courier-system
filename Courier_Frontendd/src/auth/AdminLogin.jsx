@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import  API_URL  from "../pages/apiConfig";
 export default function AdminLogin() {
   const [creds, setCreds] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
@@ -8,8 +8,7 @@ export default function AdminLogin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // This calls Django's built-in auth or a custom endpoint
-    const response = await fetch("http://127.0.0.1:8000/api/logins/", {
+    const response = await fetch(`${API_URL}/logins/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds),
@@ -17,7 +16,7 @@ export default function AdminLogin() {
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem("isAdmin", "true"); // A simple way to "remember" login
+      localStorage.setItem("isAdmin", "true"); 
       navigate("/admin");
     } else {
       setError("Invalid Admin Credentials");
