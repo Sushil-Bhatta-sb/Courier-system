@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'courier_management.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=f"postgresql://postgres:sushil123@localhost:5432/courierinfo",
+        default=f"postgresql://postgres:sushil123@#@localhost:5432/courierinfo",
         conn_max_age=600,
         ssl_require=False
     )
