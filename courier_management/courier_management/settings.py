@@ -1,14 +1,15 @@
 
 from pathlib import Path
 import os
-
+import dj_database_url
+# postgresql://courier_db_wcjb_user:rKCPw2kYeD1EscETStqt91bzkE5q3u78@dpg-d64t16v5r7bs739gm2g0-a/courier_db_wcjb
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--$*qaq+m19vy7k2+-r&!s486z8z*bd1k)cjwtjrvotfie=@gxp'
 
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "courier-system-kf4b.onrender.com"]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
@@ -79,15 +80,13 @@ WSGI_APPLICATION = 'courier_management.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'courierinfo',  
-        'USER': 'postgres',            
-        'PASSWORD': 'sushil123@#',    
-        'HOST': 'localhost',            
-        'PORT': '5432',                
-    }
+    "default": dj_database_url.config(
+        default=f"postgresql://postgres:sushil123@localhost:5432/courierinfo",
+        conn_max_age=600,
+        ssl_require=False
+    )
 }
+
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
