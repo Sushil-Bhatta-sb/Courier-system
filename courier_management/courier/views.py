@@ -558,7 +558,7 @@ def admin_stats(request):
     })
 
 @api_view(['POST'])
-@permission_classes([AllowAny]) # Anyone can attempt to login
+@permission_classes([AllowAny])
 def admin_login(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -571,3 +571,38 @@ def admin_login(request):
         return JsonResponse({"message": "Login successful", "isAdmin": True}, status=200)
     else:
         return JsonResponse({"error": "Invalid credentials or not an admin"}, status=401)
+
+@csrf_exempt
+def staff_login(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST only"}, status=400)
+
+    try:
+        data = json.loads(request.body)
+        phone = data.get("phone")
+    except Exception as e:
+        return JsonResponse({"error": f"Invalid JSON: {str(e)}"}, status=400)
+
+    if not phone:
+        return JsonResponse({"error": "Phone required"}, status=400)
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT staff_id, name FROM staff WHERE phone = %s",
+                [phone]
+            )
+            row = cursor.fetchone()
+            
+        if not row:
+            return JsonResponse({"error": "Staff not found"}, status=404)
+
+        staff_id, name = row
+        return JsonResponse({
+            "success": True,
+            "staff_id": staff_id,
+            "name": name
+        })
+    except Exception as e:
+        # This will send the actual error message to your React app
+        return JsonResponse({"error": f"Database error: {str(e)}"}, status=500)

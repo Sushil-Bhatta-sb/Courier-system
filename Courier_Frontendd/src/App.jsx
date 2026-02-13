@@ -23,6 +23,7 @@ import CustomerDsh from "./pages/customer/CustomerDsh";
 import AddCustomer from "./pages/customer/AddCustomer"; 
 import AddShipment from "./pages/customer/AddShipment";
 
+import StaffLogin from "./auth/StaffLogin";
 import StaffDsh from "./pages/Staff/StaffDsh";
 import ViewShipment from "./pages/Staff/ViewShipment";
 
@@ -78,6 +79,7 @@ export default function App() {
           <Route path="/customer/AddShipment" element={<AddShipment />} />
           <Route path="/customer/settings" element={<ProfileSettings />} />
 
+          <Route path="/staff/login" element={<StaffLogin />} />
           <Route path="/staff" element={<StaffDsh />}>
             <Route path="shipments" element={<ViewShipment />} />
           </Route>
