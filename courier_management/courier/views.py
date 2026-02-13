@@ -16,6 +16,11 @@ import secrets
 import string
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils import timezone
+import os
+import base64
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 
 @csrf_exempt
 def add_mode(request):
@@ -458,7 +463,6 @@ def claim_shipment(request):
     return JsonResponse({"error": "POST required"}, status=405)
 
 @csrf_exempt
-@csrf_exempt
 def update_shipment_status(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=400)
@@ -606,3 +610,37 @@ def staff_login(request):
     except Exception as e:
         # This will send the actual error message to your React app
         return JsonResponse({"error": f"Database error: {str(e)}"}, status=500)
+
+@csrf_exempt
+def upload_proof(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+    try:
+        shipment_id = request.POST.get("shipment_id")
+        photo = request.FILES.get("photo")
+        signature_data = request.POST.get("signature")  
+        if not photo or not signature_data or not shipment_id:
+            return JsonResponse({"error": "Missing data (photo, signature, or ID)"}, status=400)
+        photo_path = default_storage.save(f"proof/photos/ship_{shipment_id}_{photo.name}", photo)
+        try:
+            format, imgstr = signature_data.split(';base64,')
+            ext = format.split('/')[-1]
+            signature_file = ContentFile(base64.b64decode(imgstr), name=f"sig_{shipment_id}.{ext}")
+            sign_path = default_storage.save(f"proof/signatures/sig_{shipment_id}.{ext}", signature_file)
+        except Exception as e:
+            return JsonResponse({"error": f"Signature decoding failed: {str(e)}"}, status=400)
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                UPDATE shipment 
+                SET delivery_photo=%s, 
+                    delivery_signature=%s, 
+                    delivered_at=%s,
+                    status_id = (SELECT status_id FROM status WHERE status_name='Delivered')
+                WHERE shipment_id=%s
+            """, [photo_path, sign_path, timezone.now(), shipment_id])
+
+        return JsonResponse({"success": True})
+
+    except Exception as e:
+        print(f"CRITICAL ERROR: {str(e)}")
+        return JsonResponse({"error": str(e)}, status=500)

@@ -30,4 +30,6 @@ urlpatterns = [
     path('api/update_shipment_status/', views.update_shipment_status, name='update_shipment_status'),
     path('api/track/<int:shipment_id>/', views.track_shipment),
     path('api/logins/',views.admin_login),
+    path("api/upload_proof/", views.upload_proof),
+
 ]
