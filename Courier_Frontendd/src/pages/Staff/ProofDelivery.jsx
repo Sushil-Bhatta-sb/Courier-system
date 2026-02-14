@@ -8,7 +8,6 @@ export default function ProofDelivery({ shipmentId, onDone }) {
   const [photo, setPhoto] = useState(null);
 
   const submitProof = async () => {
-    // 1. Validation
     if (!sigRef.current || sigRef.current.isEmpty()) {
       toast.error("Please provide a signature");
       return;
@@ -18,19 +17,16 @@ export default function ProofDelivery({ shipmentId, onDone }) {
       return;
     }
 
-    // 2. FIX: Use getCanvas() instead of getTrimmedCanvas() to avoid the error
     const signatureImage = sigRef.current.getCanvas().toDataURL("image/png");
 
     const formData = new FormData();
     formData.append("shipment_id", shipmentId);
-    formData.append("signature", signatureImage); // This is a Base64 string
-    formData.append("photo", photo); // This is the actual file
-
+    formData.append("signature", signatureImage); 
+    formData.append("photo", photo); 
     try {
       const res = await fetch(`${API_URL}/upload_proof/`, {
         method: "POST",
         body: formData,
-        // Note: Do NOT set Content-Type header when sending FormData
       });
 
       if (res.ok) {
@@ -50,7 +46,6 @@ export default function ProofDelivery({ shipmentId, onDone }) {
     <div className="bg-white p-5 rounded-xl space-y-4 border shadow-sm">
       <h3 className="font-bold text-slate-700 border-b pb-2">Complete Delivery</h3>
 
-      {/* PHOTO UPLOAD */}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">Package Photo</label>
         <input 
@@ -60,8 +55,6 @@ export default function ProofDelivery({ shipmentId, onDone }) {
           className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
         />
       </div>
-
-      {/* SIGNATURE */}
       <div>
         <div className="flex justify-between items-end mb-1">
           <label className="text-sm font-medium text-gray-600">Customer Signature</label>

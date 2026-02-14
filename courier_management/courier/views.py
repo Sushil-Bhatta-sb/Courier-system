@@ -135,17 +135,28 @@ def get_shipments(request):
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT 
-                sh.shipment_id, sh.pickup_address, sh.delivery_address, 
-                sh.weight, sh.cost, m.mode_name, st.status_name, sh.staff_id, sh.remarks
+                sh.shipment_id,       
+                sh.pickup_address,    
+                sh.delivery_address,  
+                sh.weight,            
+                sh.cost,              
+                m.mode_name,          
+                st.status_name,       
+                sh.staff_id,          
+                sh.delivery_photo,    
+                sh.delivery_signature,
+                sh.remarks            
             FROM shipment sh
             JOIN mode_of_transport m ON sh.mode_id = m.mode_id
             JOIN status st ON sh.status_id = st.status_id
         """)
         rows = cursor.fetchall()
+
     shipments = []
     for r in rows:
         shipments.append({
             "id": r[0],
+            "shipment_id": r[0],      
             "pickup_address": r[1],
             "delivery_address": r[2],
             "weight": r[3],
@@ -153,7 +164,9 @@ def get_shipments(request):
             "mode": r[5],
             "status": r[6],
             "staff_id": r[7],
-            "remarks": r[8],
+            "delivery_photo": r[8],    
+            "delivery_signature": r[9],
+            "remarks": r[10],          
         })
     return JsonResponse(shipments, safe=False)
 
@@ -463,16 +476,17 @@ def claim_shipment(request):
     return JsonResponse({"error": "POST required"}, status=405)
 
 @csrf_exempt
+@csrf_exempt
 def update_shipment_status(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=400)
 
     data = json.loads(request.body)
     shipment_id = data.get("shipment_id")
-    new_status = data.get("status")  # "Shipped" or "Delivered"
+    new_status = data.get("status")
+    remarks = data.get("remarks")  
 
     with connection.cursor() as cursor:
-        # get status_id from name
         cursor.execute(
             "SELECT status_id FROM status WHERE status_name=%s",
             [new_status]
@@ -484,12 +498,13 @@ def update_shipment_status(request):
 
         status_id = row[0]
 
+      
         cursor.execute(
-            "UPDATE shipment SET status_id=%s WHERE shipment_id=%s",
-            [status_id, shipment_id]
+            "UPDATE shipment SET status_id=%s, remarks=%s WHERE shipment_id=%s",
+            [status_id, remarks, shipment_id]
         )
 
-    return JsonResponse({"message": "Status updated"})
+    return JsonResponse({"message": "Status updated and remarks saved"})
 
 @csrf_exempt
 def track_shipment(request, shipment_id):
