@@ -17,35 +17,22 @@
 
 <details open>
 <summary>Click to expand</summary>
-
-- [🌟 Overview](#-overview)
-- [🎯 Problem & Solution](#-problem--solution)
-- [✨ Key Features](#-key-features)
-  - [👑 Admin Portal](#-admin-portal)
-  - [🚚 Staff Portal](#-staff-portal)
-  - [📦 Customer Portal](#-customer-portal)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [📋 Prerequisites](#-prerequisites)
-- [⚡ Installation](#-installation)
-  - [1️⃣ Clone the Repository](#1️⃣-clone-the-repository)
-  - [2️⃣ Backend Setup](#2️⃣-backend-setup)
-  - [3️⃣ Frontend Setup](#3️⃣-frontend-setup)
-- [🖼️ Frontend Showcase](#️-frontend-showcase)
-- [🌐 Environment Variables](#-environment-variables)
-- [📁 Project Structure](#-project-structure)
-- [📡 API Endpoints](#-api-endpoints)
-  - [Authentication](#authentication)
-  - [Customer Management](#customer-management)
-  - [Shipment Management](#shipment-management)
-  - [Delivery Operations](#delivery-operations)
-  - [Analytics](#analytics)
-- [🔐 Security Features](#-security-features)
-- [🤝 Contributing](#-contributing)
-- [📝 License](#-license)
-- [👨‍💻 Development Team](#-development-team)
-- [📬 Contact & Support](#-contact--support)
-- [🙏 Acknowledgments](#-acknowledgments)
-- [📊 Project Stats](#-project-stats)
+- <span style="text-decoration: none;">[🌟 Overview](#-overview)</span>
+- <span style="text-decoration: none;">[🎯 Problem & Solution](#-problem--solution)</span>
+- <span style="text-decoration: none;">[✨ Key Features](#-key-features)</span>
+- <span style="text-decoration: none;">[🛠️ Tech Stack](#️-tech-stack)</span>
+- <span style="text-decoration: none;">[📋 Prerequisites](#-prerequisites)</span>
+- <span style="text-decoration: none;">[⚡ Installation](#-installation)</span>
+- <span style="text-decoration: none;">[🖼️ Frontend Showcase](#️-frontend-showcase)</span>
+- <span style="text-decoration: none;">[🌐 Environment Variables](#-environment-variables)</span>
+- <span style="text-decoration: none;">[📁 Project Structure](#-project-structure)</span>
+- <span style="text-decoration: none;">[📡 API Endpoints](#-api-endpoints)</span>
+- <span style="text-decoration: none;">[🔐 Security Features](#-security-features)</span>
+- <span style="text-decoration: none;">[🤝 Contributing](#-contributing)</span>
+- <span style="text-decoration: none;">[📝 License](#-license)</span>
+- <span style="text-decoration: none;">[👨‍💻 Development Team](#-development-team)</span>
+- <span style="text-decoration: none;">[📬 Contact & Support](#-contact--support)</span>
+- <span style="text-decoration: none;">[🙏 Acknowledgments](#-acknowledgments)</span>
 
 </details>
 
@@ -295,7 +282,7 @@ Courier-System/
 │   │   ├── models.py                     # Data models
 │   │   ├── views.py                      # API views
 │   │   ├── urls.py                       # URL routing
-│   │   └── serializers.py                # DRF serializers
+│   │   
 │   │
 │   ├── courier_management/               # Project settings
 │   │   ├── settings.py                   # Django settings
@@ -457,8 +444,6 @@ Courier-System/
 - ✅ **Server-side Validation** — All inputs validated on backend
 - ✅ **Session-based Authentication** — Secure user sessions
 - ✅ **Media File Isolation** — Uploaded files stored securely
-- ✅ **SQL Injection Prevention** — Using Django ORM
-
 ---
 
 ## 🤝 Contributing
@@ -499,13 +484,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <table>
 <tr>
 <td align="center">
-<img src="https://github.com/sushilbhatt567.png" width="100px;" alt="Sushil Bhatta"/><br />
+<img src="images/sushil.png" width="100px;" alt="Sushil Bhatta"/><br />
 <sub><b>Sushil Bhatta</b></sub><br />
 <a href="https://github.com/Sushil-Bhatta-sb">GitHub</a>
 </td>
 <td align="center">
+<img src="images/subodh.png" width="100px;" alt="Subodh Bhatta"/><br />
 <sub><b>Subodh Bhatta</b></sub><br />
-Co-Developer
+<a href="https://github.com/socode6">GitHub</a>
 </td>
 </tr>
 </table>
@@ -514,7 +500,7 @@ Co-Developer
 
 ## 📬 Contact & Support
 
-- **GitHub**: [@sushilbhatt567](https://github.com/Sushil-Bhatta-sb)
+- **GitHub**: [@sushilbhatt567](https://github.com/Sushil-Bhatta-sb), [@socode6](https://github.com/socode)
 - **Twitter/X**: [@sushilbhatt567](https://twitter.com/sushilbhatt567)
 - **Email**: bhattsushil567@gmail.com
 
@@ -525,15 +511,6 @@ Co-Developer
 - Django and React communities for excellent documentation
 - All contributors who helped improve this project
 - Open source libraries that made this possible
-
----
-
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/sushilbhatt567/Courier_System?style=social)
-![GitHub forks](https://img.shields.io/github/forks/sushilbhatt567/Courier_System?style=social)
-![GitHub issues](https://img.shields.io/github/issues/sushilbhatt567/Courier_System)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/sushilbhatt567/Courier_System)
 
 ---
 
