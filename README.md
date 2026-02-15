@@ -25,7 +25,6 @@
 - [📋 Prerequisites](#-prerequisites)
 - [⚡ Installation](#-installation)
 - [🖼️ Frontend Showcase](#️-frontend-showcase)
-- [🌐 Environment Variables](#-environment-variables)
 - [📁 Project Structure](#-project-structure)
 - [📡 API Endpoints](#-api-endpoints)
 - [🔐 Security Features](#-security-features)
@@ -233,32 +232,6 @@ npm run dev
 </tr>
 </tbody>
 </table>
-
----
-
-## 🌐 Environment Variables
-
-Create a `.env` file in the `courier_management` directory:
-
-```env
-# Django Settings
-DEBUG=True
-SECRET_KEY=your-secret-key-here-change-in-production
-
-# Database Configuration
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=courierdb
-DB_USER=postgres
-DB_PASSWORD=your-database-password
-DB_HOST=localhost
-DB_PORT=5432
-
-# Media Files
-MEDIA_URL=/media/
-MEDIA_ROOT=media/
-```
-
----
 
 ## 📁 Project Structure
 
