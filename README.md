@@ -17,25 +17,25 @@
 
 <details open>
 <summary>Click to expand</summary>
-- <span style="text-decoration: none;">[🌟 Overview](#-overview)</span>
-- <span style="text-decoration: none;">[🎯 Problem & Solution](#-problem--solution)</span>
-- <span style="text-decoration: none;">[✨ Key Features](#-key-features)</span>
-- <span style="text-decoration: none;">[🛠️ Tech Stack](#️-tech-stack)</span>
-- <span style="text-decoration: none;">[📋 Prerequisites](#-prerequisites)</span>
-- <span style="text-decoration: none;">[⚡ Installation](#-installation)</span>
-- <span style="text-decoration: none;">[🖼️ Frontend Showcase](#️-frontend-showcase)</span>
-- <span style="text-decoration: none;">[🌐 Environment Variables](#-environment-variables)</span>
-- <span style="text-decoration: none;">[📁 Project Structure](#-project-structure)</span>
-- <span style="text-decoration: none;">[📡 API Endpoints](#-api-endpoints)</span>
-- <span style="text-decoration: none;">[🔐 Security Features](#-security-features)</span>
-- <span style="text-decoration: none;">[🤝 Contributing](#-contributing)</span>
-- <span style="text-decoration: none;">[📝 License](#-license)</span>
-- <span style="text-decoration: none;">[👨‍💻 Development Team](#-development-team)</span>
-- <span style="text-decoration: none;">[📬 Contact & Support](#-contact--support)</span>
-- <span style="text-decoration: none;">[🙏 Acknowledgments](#-acknowledgments)</span>
+
+- [🌟 Overview](#-overview)
+- [🎯 Problem & Solution](#-problem--solution)
+- [✨ Key Features](#-key-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📋 Prerequisites](#-prerequisites)
+- [⚡ Installation](#-installation)
+- [🖼️ Frontend Showcase](#️-frontend-showcase)
+- [🌐 Environment Variables](#-environment-variables)
+- [📁 Project Structure](#-project-structure)
+- [📡 API Endpoints](#-api-endpoints)
+- [🔐 Security Features](#-security-features)
+- [🤝 Contributing](#-contributing)
+- [📝 License](#-license)
+- [👨‍💻 Development Team](#-development-team)
+- [📬 Contact & Support](#-contact--support)
+- [🙏 Acknowledgments](#-acknowledgments)
 
 </details>
-
 ---
 
 ## 🌟 Overview
