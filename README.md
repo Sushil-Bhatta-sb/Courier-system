@@ -9,9 +9,45 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-[Features](#-key-features) • [Installation](#-installation) • [API Documentation](#-api-endpoints) • [Contributing](#-contributing)
-
 </div>
+
+---
+
+## 📑 Table of Contents
+
+<details open>
+<summary>Click to expand</summary>
+
+- [🌟 Overview](#-overview)
+- [🎯 Problem & Solution](#-problem--solution)
+- [✨ Key Features](#-key-features)
+  - [👑 Admin Portal](#-admin-portal)
+  - [🚚 Staff Portal](#-staff-portal)
+  - [📦 Customer Portal](#-customer-portal)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📋 Prerequisites](#-prerequisites)
+- [⚡ Installation](#-installation)
+  - [1️⃣ Clone the Repository](#1️⃣-clone-the-repository)
+  - [2️⃣ Backend Setup](#2️⃣-backend-setup)
+  - [3️⃣ Frontend Setup](#3️⃣-frontend-setup)
+- [🖼️ Frontend Showcase](#️-frontend-showcase)
+- [🌐 Environment Variables](#-environment-variables)
+- [📁 Project Structure](#-project-structure)
+- [📡 API Endpoints](#-api-endpoints)
+  - [Authentication](#authentication)
+  - [Customer Management](#customer-management)
+  - [Shipment Management](#shipment-management)
+  - [Delivery Operations](#delivery-operations)
+  - [Analytics](#analytics)
+- [🔐 Security Features](#-security-features)
+- [🤝 Contributing](#-contributing)
+- [📝 License](#-license)
+- [👨‍💻 Development Team](#-development-team)
+- [📬 Contact & Support](#-contact--support)
+- [🙏 Acknowledgments](#-acknowledgments)
+- [📊 Project Stats](#-project-stats)
+
+</details>
 
 ---
 
@@ -25,12 +61,32 @@ Courier Management System is a comprehensive logistics solution that enables adm
 
 ## 🎯 Problem & Solution
 
-| Challenge | Our Solution |
-|-----------|--------------|
-| ❌ Manual parcel tracking | ✅ Real-time dashboards with live updates |
-| ❌ No delivery proof | ✅ Photo & signature upload functionality |
-| ❌ Staff coordination issues | ✅ Intelligent task claiming system |
-| ❌ Poor scalability | ✅ Django + React architecture |
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Our Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❌ Manual parcel tracking</td>
+<td>✅ Real-time dashboards with live updates</td>
+</tr>
+<tr>
+<td>❌ No delivery proof</td>
+<td>✅ Photo & signature upload functionality</td>
+</tr>
+<tr>
+<td>❌ Staff coordination issues</td>
+<td>✅ Intelligent task claiming system</td>
+</tr>
+<tr>
+<td>❌ Poor scalability</td>
+<td>✅ Django + React architecture</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
@@ -59,7 +115,7 @@ Courier Management System is a comprehensive logistics solution that enables adm
 
 <table>
 <tr>
-<td>
+<td width="50%">
 
 **Backend**
 - Django 4.2
@@ -68,7 +124,7 @@ Courier Management System is a comprehensive logistics solution that enables adm
 - Session-based Authentication
 
 </td>
-<td>
+<td width="50%">
 
 **Frontend**
 - React 18
@@ -117,7 +173,6 @@ python -m venv venv
 venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
-show
 
 # Install dependencies
 pip install -r requirements.txt
@@ -136,7 +191,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Backend will be available at `http://localhost:8000`
+> **Backend will be available at** `http://localhost:8000`
 
 ### 3️⃣ Frontend Setup
 
@@ -151,20 +206,48 @@ npm install
 npm run dev
 ```
 
-Frontend will be available at `http://localhost:5173`
+> **Frontend will be available at** `http://localhost:5173`
 
 ---
 
 ## 🖼️ Frontend Showcase
  
-| Stage | Preview |
-|------|---------|
-| 🚀 Home Page | <img src="images/ii1.png" width="240"/> |
-| 🚀 Admin Portal | <img src="images/ii2.png" width="240"/> |
-| 🚀 Detail Section | <img src="images/ii3.png" width="240"/> |
-| 🚀 Staff Portal | <img src="images/ii4.png" width="240"/> |
-| 🚀 Customer  Login | <img src="images/ii5.png" width="240"/> |
-| 🚀 Customer Dashboard | <img src="images/ii6.png" width="240"/> |
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Preview</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🚀 Home Page</td>
+<td><img src="images/ii1.png" width="240"/></td>
+</tr>
+<tr>
+<td>🚀 Admin Portal</td>
+<td><img src="images/ii2.png" width="240"/></td>
+</tr>
+<tr>
+<td>🚀 Detail Section</td>
+<td><img src="images/ii3.png" width="240"/></td>
+</tr>
+<tr>
+<td>🚀 Staff Portal</td>
+<td><img src="images/ii4.png" width="240"/></td>
+</tr>
+<tr>
+<td>🚀 Customer Login</td>
+<td><img src="images/ii5.png" width="240"/></td>
+</tr>
+<tr>
+<td>🚀 Customer Dashboard</td>
+<td><img src="images/ii6.png" width="240"/></td>
+</tr>
+</tbody>
+</table>
+
+---
 
 ## 🌐 Environment Variables
 
@@ -186,6 +269,7 @@ DB_PORT=5432
 # Media Files
 MEDIA_URL=/media/
 MEDIA_ROOT=media/
+```
 
 ---
 
@@ -194,36 +278,36 @@ MEDIA_ROOT=media/
 ```
 Courier-System/
 │
-├── Courier_Frontendd/              # Frontend application
+├── Courier_Frontendd/                    # Frontend application
 │   ├── src/
-│   │   ├── assets/                 # Images, icons, static files
-│   │   ├── auth/                   # Authentication components
-│   │   ├── components/             # Reusable UI components
-│   │   ├── pages/                  # Page components
-│   │   ├── App.jsx                 # Main app component
-│   │   └── main.jsx                # Entry point
-│   ├── package.json
-│   └── vite.config.js
+│   │   ├── assets/                       # Images, icons, static files
+│   │   ├── auth/                         # Authentication components
+│   │   ├── components/                   # Reusable UI components
+│   │   ├── pages/                        # Page components
+│   │   ├── App.jsx                       # Main app component
+│   │   └── main.jsx                      # Entry point
+│   ├── package.json                      # Frontend dependencies
+│   └── vite.config.js                    # Vite configuration
 │
-├── courier_management/             # Backend application
-│   ├── courier/                    # Main app
-│   │   ├── migrations/             # Database migrations
-│   │   ├── models.py               # Data models
-│   │   ├── views.py                # API views
-│   │   ├── urls.py                 # URL routing
-│   │   └── serializers.py          # DRF serializers
+├── courier_management/                   # Backend application
+│   ├── courier/                          # Main Django app
+│   │   ├── migrations/                   # Database migrations
+│   │   ├── models.py                     # Data models
+│   │   ├── views.py                      # API views
+│   │   ├── urls.py                       # URL routing
+│   │   └── serializers.py                # DRF serializers
 │   │
-│   ├── courier_management/         # Project settings
-│   │   ├── settings.py             # Django settings
-│   │   ├── urls.py                 # Root URL config
-│   │   └── wsgi.py                 # WSGI config
+│   ├── courier_management/               # Project settings
+│   │   ├── settings.py                   # Django settings
+│   │   ├── urls.py                       # Root URL config
+│   │   └── wsgi.py                       # WSGI config
 │   │
-│   ├── media/                      # Uploaded files
-│   ├── db.sqlite3                  # SQLite database (dev)
-│   ├── manage.py                   # Django CLI
-│   └── requirements.txt            # Python dependencies
+│   ├── media/                            # Uploaded files
+│   ├── db.sqlite3                        # SQLite database (dev)
+│   ├── manage.py                         # Django CLI
+│   └── requirements.txt                  # Python dependencies
 │
-└── README.md
+└── README.md                             # Project documentation
 ```
 
 ---
@@ -231,38 +315,139 @@ Courier-System/
 ## 📡 API Endpoints
 
 ### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/staff_login/` | Staff authentication via phone number |
-| `POST` | `/api/customer_login/` | Customer authentication |
-| `POST` | `/api/logout/` | User logout |
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/staff_login/</code></td>
+<td>Staff authentication via phone number</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/customer_login/</code></td>
+<td>Customer authentication</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/logout/</code></td>
+<td>User logout</td>
+</tr>
+</tbody>
+</table>
 
 ### Customer Management
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/add_customer/` | Register new customer |
-| `GET` | `/api/get_customers/` | Fetch all customers |
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/add_customer/</code></td>
+<td>Register new customer</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/get_customers/</code></td>
+<td>Fetch all customers</td>
+</tr>
+</tbody>
+</table>
 
 ### Shipment Management
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/get_shipments/` | Fetch all shipments |
-| `POST` | `/api/create_shipment/` | Create new shipment |
-| `GET` | `/api/get_shipment/<id>/` | Get shipment details |
-|
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/get_shipments/</code></td>
+<td>Fetch all shipments</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/create_shipment/</code></td>
+<td>Create new shipment</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/get_shipment/&lt;id&gt;/</code></td>
+<td>Get shipment details</td>
+</tr>
+</tbody>
+</table>
 
 ### Delivery Operations
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/claim_shipment/` | Staff claims delivery task |
-| `POST` | `/api/update_shipment_status/` | Update delivery status |
-| `POST` | `/api/upload_proof/` | Upload proof of delivery |
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/claim_shipment/</code></td>
+<td>Staff claims delivery task</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/update_shipment_status/</code></td>
+<td>Update delivery status</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/upload_proof/</code></td>
+<td>Upload proof of delivery</td>
+</tr>
+</tbody>
+</table>
 
 ### Analytics
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/dashboard_stats/` | Get dashboard statistics |
-| `GET` | `/api/delivery_analytics/` | Delivery performance metrics |
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/dashboard_stats/</code></td>
+<td>Get dashboard statistics</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/delivery_analytics/</code></td>
+<td>Delivery performance metrics</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
