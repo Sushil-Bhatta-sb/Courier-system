@@ -142,7 +142,7 @@ Before you begin, ensure you have the following installed:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/sushilbhatt567/courier-management-system.git
+git clone https://github.com/Sushil-Bhatta-sb/Courier-system.git
 cd Courier-System
 ```
 
@@ -408,30 +408,6 @@ Courier-System/
 <td><code>POST</code></td>
 <td><code>/api/upload_proof/</code></td>
 <td>Upload proof of delivery</td>
-</tr>
-</tbody>
-</table>
-
-### Analytics
-
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Endpoint</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GET</code></td>
-<td><code>/api/dashboard_stats/</code></td>
-<td>Get dashboard statistics</td>
-</tr>
-<tr>
-<td><code>GET</code></td>
-<td><code>/api/delivery_analytics/</code></td>
-<td>Delivery performance metrics</td>
 </tr>
 </tbody>
 </table>
