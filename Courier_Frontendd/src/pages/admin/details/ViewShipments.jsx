@@ -57,8 +57,8 @@ export default function ViewShipments() {
                       <td className="px-6 py-4 font-mono text-sm text-slate-400">#{s.id}</td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col">
-                          <span className="text-slate-900 font-medium">{s.pickup}</span>
-                          <span className="text-indigo-500 text-xs font-bold">→ {s.delivery}</span>
+                          <span className="text-slate-900 font-medium">{s.pickup_address}</span>
+                          <span className="text-indigo-500 text-xs font-bold">→ {s.delivery_address}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-600">
