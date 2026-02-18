@@ -11,7 +11,7 @@
 
 ### 🌐 Hosted Application
 
-[![Frontend](https://img.shields.io/badge/Frontend-Vercel-blue?style=for-the-badge&logo=vercel&logoColor=white)](https://courier-system-two.vercel.app/)
+[![Frontend](https://img.shields.io/badge/Frontend-Vercel-blue?style=for-the-badge&logo=vercel&logoColor=white)](https://courier-system-two.vercel.app/)<br/>
 [![Backend](https://img.shields.io/badge/Backend-Render-success?style=for-the-badge&logo=render&logoColor=white)](http://courier-system-kf4b.onrender.com/)
 
 
