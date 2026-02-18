@@ -351,7 +351,7 @@ Courier-System/
 </tr>
 <tr>
 <td><code>POST</code></td>
-<td><code>/api/create_shipment/</code></td>
+<td><code>/api/add_shipment/</code></td>
 <td>Create new shipment</td>
 </tr>
 <tr>
