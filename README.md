@@ -35,7 +35,6 @@
 - [📡 API Endpoints](#-api-endpoints)
 - [🔐 Security Features](#-security-features)
 - [🤝 Contributing](#-contributing)
-- [📝 License](#-license)
 - [👨‍💻 Development Team](#-development-team)
 - [📬 Contact & Support](#-contact--support)
 - [🙏 Acknowledgments](#-acknowledgments)
@@ -425,12 +424,6 @@ We welcome contributions! Please follow these steps:
 - Use ESLint configuration for JavaScript
 - Write meaningful commit messages
 - Add tests for new features
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
