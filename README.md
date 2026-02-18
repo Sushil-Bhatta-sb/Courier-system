@@ -9,6 +9,12 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
+### 🌐 Hosted Application
+
+[![Frontend](https://img.shields.io/badge/Frontend-Vercel-blue?style=for-the-badge&logo=vercel&logoColor=white)](https://courier-system-two.vercel.app/)
+[![Backend](https://img.shields.io/badge/Backend-Render-success?style=for-the-badge&logo=render&logoColor=white)](http://courier-system-kf4b.onrender.com/)
+
+
 </div>
 
 ---
