@@ -61,16 +61,32 @@ def add_status(request):
     return JsonResponse({"msg": msg})
 
 
+import json
+import re # Added for regex validation
+from django.http import JsonResponse
+from django.db import connection
+
 @csrf_exempt
 def add_customer(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
+            name = data.get("name", "").strip()
+            phone = data.get("phone", "").strip()
+            email = data.get("email", "").strip()
+            address = data.get("address", "").strip()
 
-            name = data.get("name")
-            phone = data.get("phone")
-            email = data.get("email")
-            address = data.get("address")
+            # 1. Check for empty fields
+            if not all([name, phone, email, address]):
+                return JsonResponse({"error": "All fields are required."}, status=400)
+
+            # 2. Validate Phone (Ensure it's digits only)
+            if not phone.isdigit():
+                return JsonResponse({"error": "Phone number must contain only digits."}, status=400)
+
+            # 3. Basic Email Validation
+            if "@" not in email or "." not in email:
+                return JsonResponse({"error": "Invalid email format."}, status=400)
 
             with connection.cursor() as cursor:
                 cursor.execute("""
@@ -78,8 +94,9 @@ def add_customer(request):
                     VALUES (%s, %s, %s, %s)
                     RETURNING customer_id
                 """, [name, phone, email, address])
-
-                customer_id = cursor.fetchone()[0]
+                
+                result = cursor.fetchone()
+                customer_id = result[0]
 
             return JsonResponse({
                 "message": "Customer added successfully!",
@@ -87,12 +104,9 @@ def add_customer(request):
             })
 
         except Exception as e:
-            return JsonResponse({
-                "error": str(e)
-            }, status=500)
+            return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "POST request required"}, status=400)
-
 
 @csrf_exempt
 def add_staff(request):
@@ -124,45 +138,39 @@ def add_shipment(request):
         mode_id = data.get("mode_id")
         status_id = data.get("status_id")
 
-        # Validate required fields
+        # 1. Strict Validation: Check if any field is missing or empty
         if not all([customer_id, pickup_address, delivery_address, weight, mode_id, status_id]):
-            return JsonResponse({"error": "Missing required fields"}, status=400)
+            return JsonResponse({"error": "All fields are required. Please fill out the entire form."}, status=400)
 
-        weight = float(weight)
-
-        # 1️⃣ Get transport multiplier
         with connection.cursor() as cursor:
+            # 2. Verify if Customer ID exists in the database
+            cursor.execute("SELECT name FROM customer WHERE customer_id = %s", [customer_id])
+            customer_exists = cursor.fetchone()
+            
+            if not customer_exists:
+                return JsonResponse({"error": f"Customer ID #{customer_id} does not exist. Please create a profile first."}, status=404)
+
+            # 3. Get transport multiplier
             cursor.execute(
                 "SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s",
                 [mode_id]
             )
             row = cursor.fetchone()
 
-        if not row:
-            return JsonResponse({"error": "Invalid mode selected"}, status=400)
+            if not row:
+                return JsonResponse({"error": "Invalid transport mode selected."}, status=400)
 
-        multiplier = float(row[0])
-        cost = weight * multiplier * 100
+            multiplier = float(row[0])
+            cost = float(weight) * multiplier * 100
 
-        # 2️⃣ Insert shipment and return shipment_id
-        with connection.cursor() as cursor:
+            # 4. Insert shipment
             cursor.execute("""
                 INSERT INTO shipment 
                 (customer_id, staff_id, mode_id, status_id,
                  pickup_address, delivery_address, weight, cost, booking_date)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING shipment_id
-            """, [
-                customer_id,
-                None,
-                mode_id,
-                status_id,
-                pickup_address,
-                delivery_address,
-                weight,
-                cost,
-                date.today()
-            ])
+            """, [customer_id, None, mode_id, status_id, pickup_address, delivery_address, weight, cost, date.today()])
 
             shipment_id = cursor.fetchone()[0]
 
@@ -175,11 +183,11 @@ def add_shipment(request):
             "cost": cost
         })
 
+    except ValueError:
+        return JsonResponse({"error": "Weight must be a valid number."}, status=400)
     except Exception as e:
-        print("ERROR:", str(e))  # shows in terminal
-        return JsonResponse({
-            "error": str(e)
-        }, status=500)
+        print("ERROR:", str(e))
+        return JsonResponse({"error": "Internal server error. Please try again."}, status=500)
 
     
 def get_shipments(request):
