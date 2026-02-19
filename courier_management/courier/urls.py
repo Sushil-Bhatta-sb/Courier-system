@@ -31,5 +31,6 @@ urlpatterns = [
     path('api/track/<int:shipment_id>/', views.track_shipment),
     path('api/logins/',views.admin_login),
     path("api/upload_proof/", views.upload_proof),
+    path("api/ping/", views.ping),
 
 ]

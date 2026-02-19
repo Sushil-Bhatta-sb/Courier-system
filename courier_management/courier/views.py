@@ -22,6 +22,11 @@ import base64
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
+from django.http import HttpResponse
+
+def ping(request):
+    return HttpResponse("Alive!")
+
 @csrf_exempt
 def add_mode(request):
     if request.method == "POST":
