@@ -60,21 +60,39 @@ def add_status(request):
         msg = "Status added successfully!"
     return JsonResponse({"msg": msg})
 
+
 @csrf_exempt
 def add_customer(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        name = data.get("name")
-        phone = data.get("phone")
-        email = data.get("email")
-        address = data.get("address")
-        with connection.cursor() as cursor:
-            cursor.execute("""
-                INSERT INTO customer (name, phone, email, address)
-                VALUES (%s, %s, %s, %s)
-            """, [name, phone, email, address])
-        return JsonResponse({"message": "Customer added successfully!"})
+        try:
+            data = json.loads(request.body)
+
+            name = data.get("name")
+            phone = data.get("phone")
+            email = data.get("email")
+            address = data.get("address")
+
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO customer (name, phone, email, address)
+                    VALUES (%s, %s, %s, %s)
+                    RETURNING customer_id
+                """, [name, phone, email, address])
+
+                customer_id = cursor.fetchone()[0]
+
+            return JsonResponse({
+                "message": "Customer added successfully!",
+                "customer_id": customer_id
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                "error": str(e)
+            }, status=500)
+
     return JsonResponse({"error": "POST request required"}, status=400)
+
 
 @csrf_exempt
 def add_staff(request):
@@ -98,35 +116,59 @@ def add_shipment(request):
 
     try:
         data = json.loads(request.body)
+
         customer_id = data.get("customer_id")
         pickup_address = data.get("pickup_address")
         delivery_address = data.get("delivery_address")
-        weight = float(data.get("weight"))
+        weight = data.get("weight")
         mode_id = data.get("mode_id")
         status_id = data.get("status_id")
 
-        # 1. Calculate Cost
+        # Validate required fields
+        if not all([customer_id, pickup_address, delivery_address, weight, mode_id, status_id]):
+            return JsonResponse({"error": "Missing required fields"}, status=400)
+
+        weight = float(weight)
+
+        # 1️⃣ Get transport multiplier
         with connection.cursor() as cursor:
-            cursor.execute("SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s", [mode_id])
+            cursor.execute(
+                "SELECT cost_multiplier FROM mode_of_transport WHERE mode_id=%s",
+                [mode_id]
+            )
             row = cursor.fetchone()
 
-        if not row or row[0] is None:
-            return JsonResponse({"error": "Invalid mode ID"}, status=400)
+        if not row:
+            return JsonResponse({"error": "Invalid mode selected"}, status=400)
 
         multiplier = float(row[0])
         cost = weight * multiplier * 100
 
-        # 2. Insert into Database
+        # 2️⃣ Insert shipment and return shipment_id
         with connection.cursor() as cursor:
             cursor.execute("""
                 INSERT INTO shipment 
-                (customer_id, staff_id, mode_id, status_id, pickup_address, 
-                 delivery_address, weight, cost, booking_date)
+                (customer_id, staff_id, mode_id, status_id,
+                 pickup_address, delivery_address, weight, cost, booking_date)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, [customer_id, None, mode_id, status_id, pickup_address, 
-                  delivery_address, weight, cost, date.today()])
+                RETURNING shipment_id
+            """, [
+                customer_id,
+                None,
+                mode_id,
+                status_id,
+                pickup_address,
+                delivery_address,
+                weight,
+                cost,
+                date.today()
+            ])
+
+            shipment_id = cursor.fetchone()[0]
+
         return JsonResponse({
             "message": "Shipment booked successfully!",
+            "shipment_id": shipment_id,
             "pickup_address": pickup_address,
             "delivery_address": delivery_address,
             "weight": weight,
@@ -134,7 +176,11 @@ def add_shipment(request):
         })
 
     except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+        print("ERROR:", str(e))  # shows in terminal
+        return JsonResponse({
+            "error": str(e)
+        }, status=500)
+
     
 def get_shipments(request):
     with connection.cursor() as cursor:
