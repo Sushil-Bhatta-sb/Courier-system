@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API_URL from '../apiConfig';
+
 export default function CustomerDsh() {
     const [shipment, setShipment] = useState(null);
     const [searchId, setSearchId] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     
-    // CHANGED TO sessionStorage: This wipes when the tab closes
     const customerId = sessionStorage.getItem("customerId");
     const steps = ["booked", "picked up", "in transit", "delivered"];
 
@@ -48,7 +48,6 @@ export default function CustomerDsh() {
     };
 
     const handleLogout = () => {
-        // CHANGED TO sessionStorage
         sessionStorage.removeItem("customerId");
         navigate("/login");
     };
@@ -58,62 +57,83 @@ export default function CustomerDsh() {
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-indigo-100">
-            {/* --- TOP NAV: Frosted Glass Effect --- */}
             
-            <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
-                <div className="flex items-center gap-10">
+            {/* --- TOP NAV: Responsive & Frosted Glass --- */}
+            <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between sticky top-0 z-50 gap-3 sm:gap-0">
+
+                {/* Left: Logo + Links */}
+                <div className="flex items-center justify-between w-full sm:w-auto gap-4 sm:gap-10">
                     <h1 className="text-2xl font-black bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">
                         LOGI<span className="text-slate-400">.</span>
                     </h1>
-                    <div className="flex items-center gap-4">
-                                            <button
-                        onClick={() => navigate(-1)}
-                        className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
-                    >
-                        ← Back
-                    </button>
-                        <Link to="/customer/dashboard" className="text-sm font-bold text-indigo-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600">Dashboard</Link>
-                        <Link to="/customer/AddCustomer" className="text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors">Settings</Link>
+
+                    <div className="flex items-center gap-3 flex-wrap">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                        >
+                            ← Back
+                        </button>
+                        <Link to="/customer/dashboard" className="text-sm font-bold text-indigo-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600">
+                            Dashboard
+                        </Link>
+                        <Link to="/customer/AddCustomer" className="text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors">
+                            Settings
+                        </Link>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-6">
-                    <div className="flex items-center bg-slate-100/50 rounded-2xl px-4 py-2 border border-slate-200/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300 w-full sm:w-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* Right: Search + Sign Out */}
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+
+                    {/* Tracking Input */}
+                    <div className="flex items-center bg-slate-100/50 rounded-2xl px-3 py-2 border border-slate-200/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300 w-auto shrink">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <input 
                             type="text" 
                             placeholder="Tracking ID..." 
-                            className="bg-transparent border-none outline-none text-xs font-bold w-40 placeholder:text-slate-400"
+                            className="bg-transparent border-none outline-none text-xs font-bold w-24 sm:w-40 placeholder:text-slate-400"
                             value={searchId}
                             onChange={(e) => setSearchId(e.target.value)}
                         />
-                        <button onClick={handleSearch} className="text-indigo-600 font-black text-[10px] uppercase tracking-widest ml-2 hover:opacity-70">
+                        <button onClick={handleSearch} className="text-indigo-600 font-black text-[10px] uppercase tracking-widest ml-2 hover:opacity-70 shrink-0">
                             {loading ? "..." : "Track"}
                         </button>
                     </div>
-                    <button onClick={handleLogout} className="text-slate-400 hover:text-rose-500 text-xs font-bold transition-colors">
+
+                    {/* Sign Out */}
+                    <button onClick={handleLogout} className="text-slate-400 hover:text-rose-500 text-xs font-bold transition-colors shrink-0 sm:ml-4">
                         Sign Out
                     </button>
                 </div>
+
             </nav>
 
-            <main className="max-w-7xl mx-auto p-8 md:p-12">
+            {/* --- MAIN CONTENT --- */}
+            <main className="max-w-7xl mx-auto p-6 md:p-12">
+                
+                {/* HEADER */}
                 <header className="mb-12">
                     <span className="text-indigo-600 font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">Customer Portal</span>
-                    <h2 className="text-5xl font-black tracking-tight text-slate-900 mb-2">Track your <span className="text-indigo-600">Journey.</span></h2>
+                    <h2 className="text-5xl font-black tracking-tight text-slate-900 mb-2">
+                        Track your <span className="text-indigo-600">Journey.</span>
+                    </h2>
                     <p className="text-slate-400 font-medium text-lg">Manage your logistics and real-time shipments.</p>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+                    {/* LEFT: SHIPMENT CARD */}
                     <div className="lg:col-span-8 group">
                         <div className="bg-white rounded-[3rem] p-10 md:p-14 shadow-[0_30px_100px_rgba(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_30px_100px_rgba(79,70,229,0.08)] transition-all duration-500 relative overflow-hidden">
                             <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors duration-500"></div>
-                            
+
                             {shipment ? (
                                 <div className="relative z-10">
-                                    <div className="flex justify-between items-center mb-16">
+                                    {/* Shipment Header */}
+                                    <div className="flex justify-between items-center mb-16 flex-wrap gap-4">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
                                                 <div className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></div>
@@ -125,6 +145,8 @@ export default function CustomerDsh() {
                                             + New Order
                                         </Link>
                                     </div>
+
+                                    {/* PROGRESS BAR */}
                                     <div className="relative mb-20">
                                         <div className="absolute top-7 left-2 right-2 h-1.5 bg-slate-100 rounded-full"></div>
                                         <div 
@@ -155,6 +177,7 @@ export default function CustomerDsh() {
                                         </div>
                                     </div>
 
+                                    {/* DESTINATION & WEIGHT */}
                                     <div className="grid grid-cols-2 gap-12 p-10 bg-slate-50/50 rounded-4xl border border-slate-100">
                                         <div className="space-y-1">
                                             <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Destination</p>
@@ -177,6 +200,8 @@ export default function CustomerDsh() {
                             )}
                         </div>
                     </div>
+
+                    {/* RIGHT PANEL */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="bg-indigo-600 rounded-[2.5rem] p-10 text-white shadow-2xl shadow-indigo-200 flex flex-col justify-between h-75">
                             <div>
@@ -187,6 +212,7 @@ export default function CustomerDsh() {
                                 Get Help Now
                             </button>
                         </div>
+
                         <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
                             <h4 className="font-black text-slate-900 mb-8 flex justify-between items-center">
                                 Timeline 
@@ -210,6 +236,7 @@ export default function CustomerDsh() {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </main>
         </div>
