@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import React from "react";
 
 export default function DetailsDsh() {
+  const navigate = useNavigate();
   const menuItems = [
     {
       title: "Customer Directory",
@@ -47,6 +48,12 @@ export default function DetailsDsh() {
 
   return (
     <div className="min-h-screen bg-[#1e293b] p-8 font-sans text-slate-200">
+            <button
+          onClick={() => navigate(-1)}
+               className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                  >
+               ← Back
+       </button>
       <div className="max-w-6xl mx-auto">
         <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>

@@ -60,6 +60,12 @@ export default function StaffDsh() {
   return (
     <div className="p-8 max-w-7xl mx-auto bg-gray-50 min-h-screen">
       <Toaster position="top-right" />
+                          <button
+                        onClick={() => navigate(-1)}
+                        className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                    >
+                        ← Back
+                    </button>
       <div className="flex justify-between items-start mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Staff Operations</h1>

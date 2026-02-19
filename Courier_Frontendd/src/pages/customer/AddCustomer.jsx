@@ -21,6 +21,7 @@ export default function AddCustomer() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+      
       <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-slate-100">
         <h2 className="text-2xl font-black text-slate-800 mb-6 text-center">New Customer Profile</h2>
         
@@ -30,7 +31,7 @@ export default function AddCustomer() {
         <input placeholder="Permanent Address" className={inputClass} onChange={e => setAddress(e.target.value)} />
 
         <button onClick={addCustomer} className="w-full bg-indigo-600 text-white font-bold py-3.5 rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-100 mt-2">
-          Add Customer
+          Add Profile
         </button>
 
         {msg && <p className="mt-4 text-center text-sm font-semibold text-indigo-600">{msg}</p>}

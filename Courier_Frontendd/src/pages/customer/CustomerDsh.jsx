@@ -59,19 +59,26 @@ export default function CustomerDsh() {
     return (
         <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-indigo-100">
             {/* --- TOP NAV: Frosted Glass Effect --- */}
+            
             <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
                 <div className="flex items-center gap-10">
                     <h1 className="text-2xl font-black bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">
                         LOGI<span className="text-slate-400">.</span>
                     </h1>
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="flex items-center gap-4">
+                                            <button
+                        onClick={() => navigate(-1)}
+                        className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                    >
+                        ← Back
+                    </button>
                         <Link to="/customer/dashboard" className="text-sm font-bold text-indigo-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600">Dashboard</Link>
                         <Link to="/customer/AddCustomer" className="text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors">Settings</Link>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-6">
-                    <div className="hidden sm:flex items-center bg-slate-100/50 rounded-2xl px-4 py-2 border border-slate-200/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300">
+                    <div className="flex items-center bg-slate-100/50 rounded-2xl px-4 py-2 border border-slate-200/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-300 w-full sm:w-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API_URL from '../apiConfig';
 export default function AddStaff() {
   const [name, setName] = useState('');
@@ -6,6 +7,7 @@ export default function AddStaff() {
   const [area, setArea] = useState('');
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const addStaff = () => {
     fetch(`${API_URL}/add_staff/`, {
@@ -22,6 +24,12 @@ export default function AddStaff() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+            <button
+          onClick={() => navigate(-1)}
+               className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                  >
+               ← 
+       </button>
       <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-slate-100">
         <h2 className="text-2xl font-black text-slate-800 mb-6 flex items-center gap-2">
             <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>

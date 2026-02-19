@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-6">
-      
+      <button
+          onClick={() => navigate(-1)}
+               className="text-slate-400 hover:text-indigo-600 text-sm font-bold transition-colors"
+                  >
+               ← 
+       </button>
       <h2 className="text-3xl font-bold text-center mb-10 text-indigo-700">
         Admin Control Panel
       </h2>

@@ -30,6 +30,7 @@ export default function AddShipment() {
   const inputClass = "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-slate-50";
 
   return (
+    
     <div className="min-h-screen bg-slate-50 p-6 flex items-center justify-center">
       <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg border border-slate-100">
         <h2 className="text-3xl font-black text-slate-800 mb-6 tracking-tight">Book Shipment</h2>
