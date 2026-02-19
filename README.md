@@ -19,10 +19,10 @@
 
 ---
 
-## 📑 Table of Contents
+## 🧭 Project Map
 
 <details open>
-<summary>Click to expand</summary>
+<summary>click to navigate!</summary>
 
 - [🌟 Overview](#-overview)
 - [🎯 Problem & Solution](#-problem--solution)
