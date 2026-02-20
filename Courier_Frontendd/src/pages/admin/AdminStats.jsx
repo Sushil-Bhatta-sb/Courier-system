@@ -26,7 +26,6 @@ export default function AdminStats() {
 
         <Card title="Total Shipments" value={stats.total_shipments} />
         <Card title="booked" value={stats.booked} />
-        <Card title="Shipped" value={stats.shipped} />
         <Card title="Delivered" value={stats.delivered} />
         <Card title="Customers" value={stats.customers} />
         <Card title="Staff" value={stats.staff} />
