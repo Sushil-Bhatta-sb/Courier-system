@@ -7,6 +7,7 @@
 ![Django](https://img.shields.io/badge/Django-4.2-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ### 🌐 Hosted Application
@@ -135,7 +136,8 @@ Courier Management System is a comprehensive logistics solution that enables adm
 **Backend**
 - Django 4.2
 - Django REST Framework
-- PostgreSQL 15
+- PostgreSQL 15 (hosted on Supabase)
+- pgAdmin 4 (database management)
 - Session-based Authentication
 
 </td>
@@ -484,6 +486,7 @@ We welcome contributions! Please follow these steps:
 ## 🙏 Acknowledgments
 
 - Django and React communities for excellent documentation
+- Supabase for providing a powerful managed PostgreSQL platform
 - All contributors who helped improve this project
 - Open source libraries that made this possible
 
