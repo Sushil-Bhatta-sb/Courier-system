@@ -24,7 +24,7 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4">
-            {/* Changed href to "to" and <a> to <Link> */}
+         
             <p
               to="/customer/AddShipment"
               className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition"
@@ -32,7 +32,7 @@ export default function Home() {
               Book Your Shipment
             </p>
 
-            {/* Path corrected to "/admin" to match your App.jsx route */}
+      
             <Link
               to="/admin-login"
               className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition"

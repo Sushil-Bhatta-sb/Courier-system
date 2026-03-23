@@ -14,24 +14,18 @@ export default function AddCustomer() {
   const [loading, setLoading] = useState(false);
 
   const addCustomer = async () => {
-    // 1. Reset states
     setMsg("");
     setCustomerId(null);
 
-    // 2. Client-side Validation
     if (!name.trim() || !phone.trim() || !email.trim() || !address.trim()) {
       setMsg("⚠️ All fields are required.");
       return;
     }
-
-    // Phone validation: Ensures only digits and at least 10 characters (adjust as needed)
     const phoneRegex = /^\d+$/;
     if (!phoneRegex.test(phone)) {
       setMsg("⚠️ Phone number must contain only digits.");
       return;
     }
-
-    // Email validation: Basic format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setMsg("⚠️ Please enter a valid email address.");
@@ -59,7 +53,6 @@ export default function AddCustomer() {
         setMsg("✅ Customer profile created successfully!");
         localStorage.setItem("customerId", data.customer_id);
       } else {
-        // Displays the specific error message from your Django backend
         setMsg(`❌ ${data.error || "Something went wrong."}`);
       }
     } catch (error) {

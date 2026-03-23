@@ -57,11 +57,7 @@ export default function CustomerDsh() {
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-indigo-100">
-            
-            {/* --- TOP NAV: Responsive & Frosted Glass --- */}
             <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between sticky top-0 z-50 gap-3 sm:gap-0">
-
-                {/* Left: Logo + Links */}
                 <div className="flex items-center justify-between w-full sm:w-auto gap-4 sm:gap-10">
                     <h1 className="text-2xl font-black bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">
                         LOGI<span className="text-slate-400">.</span>
@@ -146,7 +142,7 @@ export default function CustomerDsh() {
                                         </Link>
                                     </div>
 
-                                    {/* PROGRESS BAR */}
+                        
                                     <div className="relative mb-20">
                                         <div className="absolute top-7 left-2 right-2 h-1.5 bg-slate-100 rounded-full"></div>
                                         <div 
@@ -176,8 +172,6 @@ export default function CustomerDsh() {
                                             ))}
                                         </div>
                                     </div>
-
-                                    {/* DESTINATION & WEIGHT */}
                                     <div className="grid grid-cols-2 gap-12 p-10 bg-slate-50/50 rounded-4xl border border-slate-100">
                                         <div className="space-y-1">
                                             <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Destination</p>
