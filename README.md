@@ -14,7 +14,6 @@
 [![Frontend](https://img.shields.io/badge/Frontend-Vercel-blue?style=for-the-badge&logo=vercel&logoColor=white)](https://courier-system-two.vercel.app/)<br/>
 [![Backend](https://img.shields.io/badge/Backend-Render-success?style=for-the-badge&logo=render&logoColor=white)](http://courier-system-kf4b.onrender.com/)
 
-
 </div>
 
 ---
@@ -27,6 +26,7 @@
 - [🌟 Overview](#-overview)
 - [🎯 Problem & Solution](#-problem--solution)
 - [✨ Key Features](#-key-features)
+- [🔑 Demo Credentials](#-demo-credentials)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📋 Prerequisites](#-prerequisites)
 - [⚡ Installation](#-installation)
@@ -40,6 +40,7 @@
 - [🙏 Acknowledgments](#-acknowledgments)
 
 </details>
+
 ---
 
 ## 🌟 Overview
@@ -99,6 +100,29 @@ Courier Management System is a comprehensive logistics solution that enables adm
 - **Shipment Creation** — Book new deliveries instantly
 - **Live Tracking** — Monitor delivery status in real-time
 - **Delivery History** — Access complete shipment records
+
+---
+
+## 🔑 Demo Credentials
+
+> Use these credentials to explore the live deployed application without creating an account.
+
+### 👑 Admin Access
+> **URL:** [https://courier-system-two.vercel.app/admin-login](https://courier-system-two.vercel.app/admin-login)
+
+| Field    | Value         |
+|----------|---------------|
+| Username | `sushilll`    |
+| Password | `aaasss12@#`  |
+
+### 🚚 Staff Access
+> **URL:** [https://courier-system-two.vercel.app/staff-login](https://courier-system-two.vercel.app/staff-login)
+
+| Field        | Value          |
+|--------------|----------------|
+| Phone Number | `9878786765`   |
+
+> ℹ️ Staff login requires only a registered phone number — no password needed.
 
 ---
 
@@ -202,7 +226,7 @@ npm run dev
 ---
 
 ## 🖼️ Frontend Showcase
- 
+
 <table>
 <thead>
 <tr>
@@ -238,6 +262,8 @@ npm run dev
 </tbody>
 </table>
 
+---
+
 ## 📁 Project Structure
 
 ```
@@ -260,7 +286,6 @@ Courier-System/
 │   │   ├── models.py                     # Data models
 │   │   ├── views.py                      # API views
 │   │   ├── urls.py                       # URL routing
-│   │   
 │   │
 │   ├── courier_management/               # Project settings
 │   │   ├── settings.py                   # Django settings
@@ -397,7 +422,9 @@ Courier-System/
 - ✅ **CSRF Protection** — Enabled for all state-changing operations
 - ✅ **Server-side Validation** — All inputs validated on backend
 - ✅ **Session-based Authentication** — Secure user sessions
+- ✅ **Password Hashing** — All passwords stored using Django's PBKDF2 hashing
 - ✅ **Media File Isolation** — Uploaded files stored securely
+
 ---
 
 ## 🤝 Contributing
